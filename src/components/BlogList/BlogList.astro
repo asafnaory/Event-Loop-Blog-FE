@@ -1,0 +1,31 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Layout from "../../layouts/ComponentsLayout/Layout.astro";
+import Card from "../Card/Card.astro";
+import styles from "./BlogList.module.css";
+
+type Props = {
+  blogs: CollectionEntry<"blogs">[];
+};
+const { blogs } = Astro.props;
+---
+
+<Layout>
+  <div class={styles["blog-container"]}>
+    <ul class={styles["blog-list"]}>
+      {
+        blogs.map((blog) => (
+          <Card
+            fullOrRlativeRedirect="relative"
+            mainImage={blog.data.image}
+            mainTitle={blog.data.title}
+            secondTitle={`Written by: ${blog.data.author}`}
+            link={`/blog/${blog.slug}`}
+            tags={blog.data.tags}
+            authorImage={blog.data.authorImage}
+          />
+        ))
+      }
+    </ul>
+  </div>
+</Layout>

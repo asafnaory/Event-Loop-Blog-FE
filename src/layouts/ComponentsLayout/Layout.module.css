@@ -1,0 +1,42 @@
+:root {
+    --main-bg-color: #0d0f18;
+    --main-lighter-bg-color: #131624;
+    --main-lighter-border-color: #131624f5;
+    --main-bg-color-hover: #0d1521f9;
+    --main-bg-color-image: #1f2630;
+    --color-primary: #020204;
+    --color-primary-hover:#007bff;
+    --color-text-on-primary: #FFF;
+    --editor-bg-color: #fefcfc;
+    --editor-text-color: #000;
+    --inactive-link-color: rgba(255, 255, 255, 0.657);
+    --active-link-color: #FFF;
+    --comment-like-background-color: #404663;
+    --header-font-family: 'Open Sans', sans-serif;
+    --text-font-family: 'Open Sans', sans-serif;
+}
+
+
+.header {
+    flex-shrink: 0;
+  }
+  .footer {
+    flex-shrink: 0;
+  }
+  
+  .main {
+    flex: 1 0 auto;
+  }
+
+  .body {
+    background-color: var(--main-bg-color);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }

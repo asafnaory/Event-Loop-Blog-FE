@@ -1,0 +1,80 @@
+---
+import styles from "./Blog.module.css";
+import { Image } from "astro:assets";
+import Layout from "../../layouts/ComponentsLayout/Layout.astro";
+import LikeManager from "../LikeManager/LikeManager.tsx";
+import CommentManager from "../CommentManager/CommentManager";
+
+type BlogProps = {
+  title: string;
+  image: {
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+  };
+  author: string;
+  tags: string[];
+};
+interface CommentableBlogProps extends BlogProps {
+  id: string;
+  commentable: boolean;
+}
+
+type Props = CommentableBlogProps | BlogProps
+
+interface BlogData {
+  likes: number;
+  comments: string[];
+}
+let initialLikes = 0;
+let initialComments: string[] = [];
+const { title, image, author, tags } = Astro.props;
+
+const id = (Astro.props as CommentableBlogProps).id; 
+const commentable = (Astro.props as CommentableBlogProps).commentable; 
+
+const response = await fetch(`http://localhost:3000/blogs/${id}`, {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+if (response.ok) {
+  const blogData: BlogData = await response.json();
+  initialLikes = blogData.likes;
+  initialComments = blogData.comments;
+}
+---
+
+<Layout>
+  <article class={styles.card}>
+    <Image
+      class={styles["card-img"]}
+      src={image.src}
+      alt={image.alt}
+      width={image.width}
+      height={image.height}
+    />
+    <h2 class={styles["card-title"]}>{title}</h2>
+    <p class={styles["card-author"]}>By {author}</p>
+    <ul class={styles["card-tags"]}>
+      {tags.map((tag) => <li class={styles.tag}>#{tag}</li>)}
+    </ul>
+    <div class={styles["card-body"]}>
+      <slot />
+    </div>
+  </article>
+  {
+    commentable && (
+      <div class={styles["like-and-comment"]}>
+        <LikeManager initialLikes={initialLikes} id={id} client:only="react" />
+        <CommentManager
+          id={id}
+          comments={initialComments}
+          client:only="react"
+        />
+      </div>
+    )
+  }
+</Layout>

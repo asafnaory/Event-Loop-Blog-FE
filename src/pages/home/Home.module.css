@@ -1,0 +1,140 @@
+@import url('../../layouts/ComponentsLayout/Layout.module.css');  
+
+.page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  /* background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../../../space-5.png'); */
+  background-repeat:round; 
+  background-size: auto 100%;
+  }
+  
+  .title{
+    margin-top: 8%;
+    color: var(--color-text-on-primary);
+    font-family: var(--text-font-family);
+    font-size: 2em;
+  }
+
+
+  .event-loop-image {
+    border-radius: 30px;
+  }
+
+  .sub-title{
+    color: var(--color-text-on-primary);
+    font-family: var(--text-font-family);
+    font-size: 2.5em;
+  }
+
+  .general-text {
+    color: var(--color-text-on-primary);
+    font-family: var(--text-font-family);
+    font-size: 1em;
+    animation: fadeIn 2s ease-in-out forwards;
+    text-align: center;
+  }
+
+  .typing-demo {
+    color: var(--color-text-on-primary);
+    margin-top: 5%;
+    width: 32ch;
+    animation:
+      typing 3s steps(32),
+      blink 0.5s step-end infinite alternate;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 3px solid;
+    font-family: var(--text-font-family);
+    font-size: 2em;
+  }
+  .about-me {
+    margin: 12%;
+    outline: 1px solid var(--main-bg-color-hover);
+    background-color: var(--main-lighter-bg-color);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    max-width: 800px;
+  }
+
+  .my-image {
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+    margin-left: 30px;
+    border-radius: 20px;
+    background-color: var(--main-bg-color-image);
+  }
+
+  .about-me-text{
+    margin: 30px;
+    color: var(--color-text-on-primary);
+    font-family: var(--text-font-family);
+    font-size: 1.2em;
+    line-height: 1.5;
+  }
+
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+  }
+
+  @keyframes blink {
+    50% {
+      border-color: transparent;
+    }
+  }
+
+  .icon-wrapper {
+    outline: 1px solid var(--main-bg-color-hover);
+    background-color: var(--main-lighter-bg-color);
+    border-radius: 20px;
+    margin-top: 5%; 
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    animation: fadeIn 2s ease-in-out forwards;
+  }
+
+  .image {
+    margin: 10px;
+    width: 150px;
+    height: 150px;
+  }
+  
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @media (max-width: 1000px) {
+    .title {
+      font-size: 1em;
+    }
+    
+    .sub-title {
+      font-size: 1.5em;
+    }
+  
+    .general-text {
+      font-size: 0.8em;
+    }
+
+    .icon-wrapper {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      align-items: center;
+      animation: fadeIn 2s ease-in-out forwards;
+    }
+  }

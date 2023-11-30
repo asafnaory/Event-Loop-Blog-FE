@@ -1,0 +1,27 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import Blog from '../../components/Blog/Blog.astro';
+    export const getStaticPaths = (async () => {
+        const blogs = await getCollection("blogs");
+        return blogs.map((blog) => {
+            return {
+                params: {
+                    slug: blog.slug,
+                },
+                props: {
+                    blog,
+                }
+            };
+        });
+    });
+
+type Props = {
+    blog: CollectionEntry<'blogs'>;
+}
+const { blog } = Astro.props
+const { Content }  = await blog.render()
+---
+
+<Blog commentable={true} id={blog.data.id} image={{src: blog.data.image, alt: 'article image' ,width: 1024, height: 1024/2}}  title={blog.data.title} author={blog.data.author} tags={blog.data.tags}>
+    <Content/>
+</Blog>

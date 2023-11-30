@@ -1,0 +1,8 @@
+---
+import { getCollection } from "astro:content";
+let allBlogs = await getCollection("blogs");
+import BlogsPage from "../../components/BlogsPage/BlogsPage.astro";
+let nestBlogs = allBlogs.filter((blog) => blog.data.tags.includes("nestjs"));
+---
+
+<BlogsPage blogs={nestBlogs} name="NestJS"/>

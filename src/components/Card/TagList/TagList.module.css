@@ -1,0 +1,18 @@
+@import url('../../../layouts/ComponentsLayout/Layout.module.css');  
+.card-tag-container{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+    list-style-type: none;
+}
+
+.card-tag {
+    text-align: center;
+    background-color: var(--main-lighter-bg-color);
+    color: var(--color-text-on-primary);
+    padding: 2px 5px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    font-family: var(--header-font-family);
+  }

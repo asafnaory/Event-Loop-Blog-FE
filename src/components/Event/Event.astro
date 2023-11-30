@@ -1,0 +1,19 @@
+---
+import style from './Event.module.css';
+import type { CollectionEntry } from "astro:content";
+type Props = {
+  event: CollectionEntry<"events">;
+};
+const { event } = Astro.props;
+---
+
+<article class={style.article}>
+  <h2>{event.data.where}</h2>
+  <p>{event.data.when}</p>
+  <p>{event.data.about}</p>
+  <ul>
+    {event.data.tags.map((tag: any) => <li>{tag}</li>)}
+  </ul>
+  <img src={event.data.image} alt={event.data.about} />
+  <a href={event.data.link}>Read more</a>
+</article>

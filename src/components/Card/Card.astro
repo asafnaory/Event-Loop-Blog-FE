@@ -1,0 +1,59 @@
+---
+import { Image } from "astro:assets";
+import styles from "./Card.module.css";
+import TagList from "./TagList/TagList.astro";
+type Props = {
+  mainTitle: string;
+  link: string;
+  mainImage: string;
+  tags: string[];
+  secondTitle?: string;
+  thirdTitle?: string;
+  authorImage?: string;
+  fullOrRlativeRedirect: "full" | "relative";
+};
+const {
+  mainTitle,
+  secondTitle,
+  thirdTitle,
+  link,
+  mainImage,
+  tags,
+  authorImage,
+  fullOrRlativeRedirect,
+} = Astro.props;
+
+const hrefLink =
+  fullOrRlativeRedirect === "relative" ? link : `https://${link}`;
+---
+
+<!-- <div class={styles["card"]}> -->
+  <a href={hrefLink} class={styles["card"]}>
+    <Image
+      class={styles["card-img"]}
+      src={mainImage}
+      alt={mainTitle}
+      width="472"
+      height="235"
+    />
+    <p class={styles["main-title"]}>{mainTitle}</p>
+    <div class={styles["card-data-wrapper"]}>
+        {
+          authorImage && (
+            <Image
+              class={styles["author-img"]}
+              src={authorImage}
+              alt="A bird."
+              width="55"
+              height="45"
+            />
+          )
+        }
+        {secondTitle && <p class={styles["sub-title"]}>{secondTitle}</p>}
+        {thirdTitle && <p class={styles["sub-title"]}>{thirdTitle}</p>}
+      <div class={styles['tag-list']}>
+        <TagList tags={tags} />
+      </div>
+    </div>
+  </a>
+<!-- </div> -->

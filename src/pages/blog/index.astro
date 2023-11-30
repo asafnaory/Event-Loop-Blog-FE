@@ -1,0 +1,7 @@
+---
+import { getCollection } from "astro:content";
+let blogs = await getCollection("blogs");
+import BlogList from "../../components/BlogList/BlogList.astro";
+---
+
+<BlogList blogs={blogs}/>

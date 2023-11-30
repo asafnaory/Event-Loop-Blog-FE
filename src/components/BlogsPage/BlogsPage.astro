@@ -1,0 +1,13 @@
+---
+import type { CollectionEntry } from "astro:content";
+import BlogList from "../BlogList/BlogList.astro";
+import Layout from "../../layouts/ComponentsLayout/Layout.astro";
+import NoBlogs from "../NoBlogs/NoBlogs.astro";
+    type Props = {
+        blogs: CollectionEntry<'blogs'>[];
+        name: string;
+    }
+    const {blogs, name}  = Astro.props;
+---
+
+{blogs.length > 0 ? <BlogList blogs={blogs}/> : <Layout><NoBlogs name={name}/></Layout>}

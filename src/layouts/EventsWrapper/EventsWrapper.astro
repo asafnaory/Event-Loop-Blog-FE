@@ -1,0 +1,32 @@
+---
+import { string } from "astro/zod";
+import Blog from "../../components/Blog/Blog.astro";
+import Card from "../../components/Card/Card.astro";
+import styles from "./EventsWrapper.module.css";
+import { getCollection, type CollectionEntry } from "astro:content";
+const { frontmatter } = Astro.props;
+const events = await getCollection("events");
+---
+
+<Blog
+  title={frontmatter.title}
+  image={{ src: frontmatter.image, alt: "my image", width: 500, height: 500 }}
+  author={frontmatter.author}
+  tags={[]}>
+  <slot />
+  <div class={styles["events-wrapper"]}>
+    {
+      events.map((event) => (
+        <Card
+          fullOrRlativeRedirect="full"
+          tags={event.data.tags}
+          link={event.data.link}
+          mainTitle={event.data.about}
+          secondTitle={`${event.data.date} - ${event.data.time}`}
+          thirdTitle={event.data.where}
+          mainImage={event.data.image}
+        />
+      ))
+    }
+  </div>
+</Blog>

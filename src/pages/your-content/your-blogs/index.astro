@@ -1,0 +1,40 @@
+---
+import { Card } from "../../../components/Card/Card";
+import { getAllBlogs } from "../../../helpers/blog-requests";
+import Layout from "../../../layouts/ComponentsLayout/Layout.astro";
+import styles from "./your-blog.module.css";
+
+const blogs = await getAllBlogs();
+---
+
+<Layout title="Blog">
+  <div class={styles["title-wrapper"]}>
+    <h1 class={styles["title"]}>All of your Blogs</h1>
+  </div>
+  <div class={styles["link-wrapper"]}>
+    {
+      blogs?.map((blog) => (
+        <Card
+          as="href"
+          href={`/your-content/your-blogs/${blog.id}`}
+          title={blog.title}
+          styles={{
+            width: "200px",
+            height: "200px",
+            fontSize: "1.5em",
+          }}
+        />
+      ))
+    }
+  </div>
+</Layout>
+<style>
+  .icon {
+    width: 24px; /* adjust as needed */
+    height: 24px; /* adjust as needed */
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+</style>
+../../../components/ClientCard/Card

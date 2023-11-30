@@ -1,0 +1,53 @@
+---
+import { Image } from "astro:assets";
+import EmptyFolder from "../../../public/empty-folder.png";
+type Props = {
+  name: string
+}
+const { name } = Astro.props
+---
+<div class="page">
+  <div class="text">
+    <p>{`Oops! There are no ${name} blogs yet.`}</p>
+    <p>{`but don't worry, I'm working on it...`}</p>
+  <div class="centered-content">
+    <Image
+    src={EmptyFolder}
+    alt="Empty Folder"
+    height={400}
+    width={400}
+    />
+  </div>
+</div>
+  
+<style>
+  .centered-content {
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+  }
+  .page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .text{
+    margin-top: 10px;
+    text-align: center ;
+    color: var(--color-text-on-primary);
+    font-size: 1.5rem;
+    font-family: var(--header-font-family);
+  }
+
+  @media (max-width: 1000px) {
+  .centered-content {
+    flex-direction: column;
+    padding: 10px;
+  }
+}
+
+</style>

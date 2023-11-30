@@ -1,0 +1,22 @@
+.footer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    color: var(--active-link-color);
+    background-color: var(--color-primary);
+    font-family: var(--header-font-family);
+    margin-top: auto;
+    border-top: 3px solid var(--inactive-link-color);
+}
+
+.footer a {
+    color: var(--active-link-color);
+    text-decoration: none;
+}
+
+@media (max-width: 1000px) {
+    .footer {
+      font-size: 2em;
+    }
+  }

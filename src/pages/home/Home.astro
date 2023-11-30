@@ -1,0 +1,110 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../../layouts/ComponentsLayout/Layout.astro";
+import NESTJS from "../../../public/nestjs.svg";
+import REACT from "../../../public/react-2.svg";
+import NODEJS from "../../../public/nodejs.svg";
+import TYPESCRIPT from "../../../public/typescript.svg";
+import JS from "../../../public/logo-javascript.svg";
+import ME from "../../../public/AsafNaory2.png";
+import EVENT_LOOP from "../../../public/event-loop-3.png";
+import styles from "./Home.module.css";
+import Icon from "../../components/Icon/Icon.astro";
+
+const iconList = [
+  {
+    name: "JavaScript",
+    image: JS,
+    link: "/javascript",
+  },
+  {
+    name: "NestJS",
+    image: NESTJS,
+    link: "/nestjs",
+  },
+  {
+    name: "React",
+    image: REACT,
+    link: "/react",
+  },
+  {
+    name: "NodeJS",
+    image: NODEJS,
+    link: "/nodejs",
+  },
+  {
+    name: "TypeScript",
+    image: TYPESCRIPT,
+    link: "/typescript",
+  },
+];
+---
+
+<Layout title="Home">
+  <div class={styles.page}>
+    <p class={styles.title}>
+      Welcome to
+    </p>
+    <Image class={styles["event-loop-image"]} src={EVENT_LOOP} alt="EVENT LOOP" width={200} height={200}/>
+    <div class={styles["icon-wrapper"]}>
+      {
+        iconList.map((icon) => (
+          <Icon link={icon.link} image={icon.image} alt={icon.name} />
+        ))
+      }
+    </div>
+    <div class={styles["about-me"]}>
+      <Image
+        class={styles["my-image"]}
+        src={ME}
+        alt="ME"
+        width={350}
+        height={250}
+      />
+      <div class={styles["about-me-text"]}>
+        <h2>About Me</h2>
+        <p>
+          Hello! Welcome to Event Loop, my corner of the digital universe. My name is Asaf
+          Naory and I'm a web developer with a passion for creating dynamic,
+          efficient, and user-friendly web experiences. My journey in the world
+          of web development began not so long ago, and it has been an
+          exhilarating ride ever since.
+        </p>
+
+        <p>
+          I have a deep affection for technologies like React, NestJS, Node.js,
+          TypeScript, JavaScript, Astro, Next.js, and RemixJS. Among these,
+          TypeScript holds a special place in my heart; it's the language that
+          truly resonates with my coding philosophy.
+        </p>
+
+        <p>
+          But there's more to me than just code. I'm currently pursuing a
+          master's in Cognitive Psychology, a field that fascinates me and often
+          intersects with my tech endeavors in unexpected and enriching ways.
+        </p>
+
+        <p>
+          When I'm not immersed in the world of web development or exploring the
+          intricacies of the human mind, you'll likely find me on the basketball
+          court or at the gym. Both sports are a big part of my life, providing
+          balance, discipline, and a bit of competitive fun.
+        </p>
+
+        <p>
+          This blog is primarily a canvas for my thoughts, discoveries, and
+          insights into web development. However, I believe in the beauty of
+          unpredictability, so don't be surprised to find posts on a variety of
+          topics that pique my interest. From the latest tech trends to musings
+          on cognitive psychology, and maybe even some sports commentary. this
+          blog is a reflection of all my passions.
+        </p>
+
+        <p>
+          Thanks for stopping by, and I hope you find something here that sparks
+          your interest!
+        </p>
+      </div>
+    </div>
+  </div>
+</Layout>

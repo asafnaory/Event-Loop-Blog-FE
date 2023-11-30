@@ -1,0 +1,16 @@
+@import url('../../layouts/ComponentsLayout/Layout.module.css');  
+
+.blog-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.blog-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    justify-items: center;
+    align-items: center;
+}

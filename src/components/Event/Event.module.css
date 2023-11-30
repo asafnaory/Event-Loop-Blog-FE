@@ -1,0 +1,29 @@
+.article {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .article h2 {
+    color: #333;
+    font-size: 1.5em;
+  }
+  
+  .article p {
+    color: #666;
+  }
+  
+  .article ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .article img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .article a {
+    color: #007bff;
+    text-decoration: none;
+  }

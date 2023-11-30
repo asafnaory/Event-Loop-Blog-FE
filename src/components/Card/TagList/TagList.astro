@@ -1,0 +1,11 @@
+---
+import styles from "./TagList.module.css";
+type Props = {
+  tags: string[];
+};
+const { tags } = Astro.props;
+---
+
+<ul class={styles["card-tag-container"]}>
+  {tags.map((tag) => <li class={styles["card-tag"]}>#{tag}</li>)}
+</ul>

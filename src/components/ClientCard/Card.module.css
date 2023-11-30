@@ -1,0 +1,30 @@
+.button {
+    background-color: var( --color-primary);
+    font-family: var(--header-font-family);
+    border: 5px white solid;
+    border-radius: 5px;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 1%;
+    padding: 5%;
+    width: 20%;
+}
+
+.button:hover {
+    background-color: var( --color-primary-hover);
+    cursor: pointer;
+}
+
+.button:active {
+    background-color: #004080;
+    box-shadow: none;
+    transform: translateY(4px);
+}
+
+.icon {
+    width: 50px;
+    height: 50px;
+}

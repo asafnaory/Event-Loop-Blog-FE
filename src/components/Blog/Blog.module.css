@@ -1,0 +1,59 @@
+@import url('../../layouts//ComponentsLayout//Layout.module.css');    
+
+.card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.card-img {
+    border-radius: 12px;
+    height: auto;
+}
+
+.card-title {
+    font-family: var(--header-font-family);
+    color: var(--color-text-on-primary);
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.card-author {
+    font-family: var(--header-font-family);
+    font-size: 1em;
+    color: var(--color-text-on-primary);
+    margin-bottom: 10px;
+}
+
+.card-tags {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 10px;
+}
+
+.tag {
+    font-family: var(--header-font-family);
+    display: inline-block;
+    background-color: #f0f0f0;
+    padding: 5px 10px;
+    margin-right: 5px;
+    border-radius: 5px;
+    font-size: 0.8em;
+}
+
+.card-body {
+    font-size: 1.3em;
+    font-family: var(--header-font-family);
+    line-height: 2; /* adjust as needed */
+    width: 50%;
+    color: var(--color-text-on-primary);
+}
+.like-and-comment{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
