@@ -24,7 +24,6 @@ type Props = {
 };
 const { subject } = Astro.props;
 const allBlogs = await getCollection("blogs");
-const subjectBlogs = allBlogs.filter((blog) => blog.data.tags.includes(subject.name));
+const subjectBlogs = allBlogs.filter((blog) => blog?.data?.tags.includes(subject.name)) || [];
 ---
-
 <BlogsPage blogs={subjectBlogs} name={subject.name} />
