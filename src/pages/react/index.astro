@@ -1,8 +1,0 @@
----
-import { getCollection } from "astro:content";
-import BlogsPage from "../../components/BlogsPage/BlogsPage.astro";
-let allBlogs = await getCollection("blogs");
-let reactBlogs = allBlogs.filter((blog) => blog.data.tags.includes("react"));
----
-
-<BlogsPage blogs={reactBlogs} name="React"/>

@@ -9,6 +9,8 @@ interface LikeManagerProps {
 }
 
 export default function LikeManager({ initialLikes = 0, id }: LikeManagerProps): JSX.Element {
+    // const baseUrl = process.env.PUBLIC_BASE_URL;
+    const baseUrl = 'http://localhost:3000'
     const [isLiked, setIsLiked] = useLocalStorage(id, false)
     const [likes, setLikes] = useState(initialLikes);
 
@@ -22,7 +24,7 @@ export default function LikeManager({ initialLikes = 0, id }: LikeManagerProps):
         setLikes(newLikes);
         setIsLiked(true);
     
-       const response = await fetch(`http://localhost:3000/blogs/${id}`, {
+       const response = await fetch(`${baseUrl}/blogs/${id}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',

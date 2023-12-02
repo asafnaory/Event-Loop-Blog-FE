@@ -1,9 +1,0 @@
----
-import { getCollection } from "astro:content";
-let allBlogs = await getCollection("blogs");
-import Layout from "../../layouts/ComponentsLayout/Layout.astro";
-import BlogsPage from "../../components/BlogsPage/BlogsPage.astro";
-let nodeBlogs = allBlogs.filter((blog) => blog.data.tags.includes("nodejs"));
----
-
-<BlogsPage blogs={nodeBlogs} name="NodeJS"/>

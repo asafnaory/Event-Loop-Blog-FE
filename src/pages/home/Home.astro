@@ -1,43 +1,10 @@
 ---
 import { Image } from "astro:assets";
 import Layout from "../../layouts/ComponentsLayout/Layout.astro";
-import NESTJS from "../../../public/nestjs.svg";
-import REACT from "../../../public/react-2.svg";
-import NODEJS from "../../../public/nodejs.svg";
-import TYPESCRIPT from "../../../public/typescript.svg";
-import JS from "../../../public/logo-javascript.svg";
 import ME from "../../../public/AsafNaory2.png";
 import EVENT_LOOP from "../../../public/event-loop-3.png";
 import styles from "./Home.module.css";
 import Icon from "../../components/Icon/Icon.astro";
-
-const iconList = [
-  {
-    name: "JavaScript",
-    image: JS,
-    link: "/javascript",
-  },
-  {
-    name: "NestJS",
-    image: NESTJS,
-    link: "/nestjs",
-  },
-  {
-    name: "React",
-    image: REACT,
-    link: "/react",
-  },
-  {
-    name: "NodeJS",
-    image: NODEJS,
-    link: "/nodejs",
-  },
-  {
-    name: "TypeScript",
-    image: TYPESCRIPT,
-    link: "/typescript",
-  },
-];
 ---
 
 <Layout title="Home">
@@ -47,11 +14,7 @@ const iconList = [
     </p>
     <Image class={styles["event-loop-image"]} src={EVENT_LOOP} alt="EVENT LOOP" width={200} height={200}/>
     <div class={styles["icon-wrapper"]}>
-      {
-        iconList.map((icon) => (
-          <Icon link={icon.link} image={icon.image} alt={icon.name} />
-        ))
-      }
+      <slot>
     </div>
     <div class={styles["about-me"]}>
       <Image

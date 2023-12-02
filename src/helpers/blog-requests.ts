@@ -1,6 +1,7 @@
 import type { Categories } from "../components/NewBlog/NewBlog";
 import type { BlogResponse } from "../types";
-const url = "http://localhost:3000/blogs";
+const baseUrl = process.env.PUBLIC_BASE_URL;
+const url = `${baseUrl}/blogs`;
 // const httpClient = fetch;
 type Blog = {
   title: string;

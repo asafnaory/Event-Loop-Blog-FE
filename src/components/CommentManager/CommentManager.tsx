@@ -7,6 +7,8 @@ type CommentManagerProps = {
 }
 
 export default function CommentManager({ comments, id }: CommentManagerProps): JSX.Element {
+    // const baseUrl = process.env.PUBLIC_BASE_URL;
+    const baseUrl = 'http://localhost:3000'
     const [comment, setComment] = useState('');
     const [error, setError] = useState(false);
 
@@ -20,7 +22,7 @@ export default function CommentManager({ comments, id }: CommentManagerProps): J
         comments.push(comment);
         setComment('');
       
-        const response = await fetch(`http://localhost:3000/blogs/${id}`, {
+        const response = await fetch(`${baseUrl}/blogs/${id}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',

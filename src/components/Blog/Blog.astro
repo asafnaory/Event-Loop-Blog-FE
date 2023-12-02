@@ -1,9 +1,12 @@
 ---
+// console.log(isDev);
+
 import styles from "./Blog.module.css";
 import { Image } from "astro:assets";
 import Layout from "../../layouts/ComponentsLayout/Layout.astro";
 import LikeManager from "../LikeManager/LikeManager.tsx";
 import CommentManager from "../CommentManager/CommentManager";
+const baseUrl = import.meta.env.PUBLIC_BASE_URL;
 
 type BlogProps = {
   title: string;
@@ -34,7 +37,7 @@ const { title, image, author, tags } = Astro.props;
 const id = (Astro.props as CommentableBlogProps).id; 
 const commentable = (Astro.props as CommentableBlogProps).commentable; 
 
-const response = await fetch(`http://localhost:3000/blogs/${id}`, {
+const response = await fetch(`${baseUrl}/blogs/${id}`, {
   method: "GET",
   headers: {
     "Content-Type": "application/json",
@@ -72,7 +75,7 @@ if (response.ok) {
         <CommentManager
           id={id}
           comments={initialComments}
-          client:only="react"
+          client:only="react" 
         />
       </div>
     )
