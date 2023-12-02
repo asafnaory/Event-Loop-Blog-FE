@@ -4,8 +4,8 @@ import Blog from "../../components/Blog/Blog.astro";
 import Card from "../../components/Card/Card.astro";
 import styles from "./EventsWrapper.module.css";
 import { getCollection, type CollectionEntry } from "astro:content";
+const events = await getCollection("events") || [];
 const { frontmatter } = Astro.props;
-const events = await getCollection("events");
 ---
 
 <Blog
@@ -16,17 +16,16 @@ const events = await getCollection("events");
   <slot />
   <div class={styles["events-wrapper"]}>
     {
-      events.map((event) => (
-        <Card
-          fullOrRlativeRedirect="full"
-          tags={event.data.tags}
-          link={event.data.link}
-          mainTitle={event.data.about}
-          secondTitle={`${event.data.date} - ${event.data.time}`}
-          thirdTitle={event.data.where}
-          mainImage={event.data.image}
-        />
-      ))
+      events.map((event) =>  { event && <Card
+        fullOrRlativeRedirect="full"
+        tags={event.data.tags}
+        link={event.data.link}
+        mainTitle={event.data.about}
+        secondTitle={`${event.data.date} - ${event.data.time}`}
+        thirdTitle={event.data.where}
+        mainImage={event.data.image}
+        /> 
+      })
     }
   </div>
 </Blog>

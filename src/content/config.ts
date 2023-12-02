@@ -8,7 +8,7 @@ const uuidSchema = z.string().refine(value => uuidRegex.test(value), {
 });
 
 const blogsCollection = defineCollection({
-  type: 'content', // v2.5.0 and later
+  type: 'content', 
   schema: z.object({
     id: z.string(),
     author: z.string(),
@@ -19,7 +19,22 @@ const blogsCollection = defineCollection({
   }),
 });
 
+const eventsCollection = defineCollection({
+  type: 'content', 
+  schema: z.object({
+    id: z.string(),
+    tags: z.array(z.string()),
+    link: z.string(),
+    about: z.string(),
+    date: z.string(),
+    time: z.string(),
+    where: z.string(),
+    image: z.string(),
+  }),
+});
+
 // 3. Export a single `collections` object to register your collection(s)
 export const collections = {
   'blogs': blogsCollection,
+  'events': eventsCollection,
 };
