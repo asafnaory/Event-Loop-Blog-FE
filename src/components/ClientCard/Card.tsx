@@ -32,7 +32,6 @@ export function Card(props: HrefProps | ButtonProps): JSX.Element {
   }
   else {
     const _exhaustiveCheck: never = props;
-    console.log(_exhaustiveCheck);
     return <></>;
   }
 }

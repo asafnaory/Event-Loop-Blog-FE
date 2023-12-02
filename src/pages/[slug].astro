@@ -5,7 +5,6 @@ import { subjectsList } from "./subjects-list";
 export const getStaticPaths = async () => {
     
     return subjectsList.map((subject) => {
-    console.log(subject);
     return {
       params: {
         slug: subject.link,

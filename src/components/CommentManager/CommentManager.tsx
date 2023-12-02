@@ -31,7 +31,6 @@ export default function CommentManager({ comments, id }: CommentManagerProps): J
             comments: comments,
           }),
         });
-        console.log(response);
         if (response.status !== 204) {
           comments.pop();
         }

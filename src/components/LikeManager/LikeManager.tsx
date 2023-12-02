@@ -33,7 +33,6 @@ export default function LikeManager({ initialLikes = 0, id }: LikeManagerProps):
             likes: newLikes,
           }),
         });
-        console.log(response);
         if (response.status !== 204) {
           setLikes(likes);
         }

@@ -40,7 +40,6 @@ return(
 
 
   function onChangeHandler(value: string, delta: any, source: any, editor: any ){
-    console.log(value, delta, source, editor);
     setBlogPost(value);
   }
 }
