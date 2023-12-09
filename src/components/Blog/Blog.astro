@@ -4,12 +4,16 @@ import { Image } from "astro:assets";
 import Layout from "../../layouts/ComponentsLayout/Layout.astro";
 import LikeManager from "../LikeManager/LikeManager.tsx";
 import CommentManager from "../CommentManager/CommentManager";
+import BlogInteractionManager from "../BlogInteractionManager/BlogInteractionManager";
 const baseUrl = import.meta.env.PUBLIC_BASE_URL;
+
+
+type ImageSrc = { height: number; src: string; width: number; format: "avif" | "png" | "webp" | "jpeg" | "jpg" | "svg" | "tiff" | "gif"};
 
 type BlogProps = {
   title: string;
   image: {
-    src: string;
+    src: ImageSrc;
     alt: string;
     width: number;
     height: number;
@@ -24,28 +28,11 @@ interface CommentableBlogProps extends BlogProps {
 
 type Props = CommentableBlogProps | BlogProps
 
-interface BlogData {
-  likes: number;
-  comments: string[];
-}
-let initialLikes = 0;
-let initialComments: string[] = [];
 const { title, image, author, tags } = Astro.props;
-
 const id = (Astro.props as CommentableBlogProps).id; 
 const commentable = (Astro.props as CommentableBlogProps).commentable; 
 
-const response = await fetch(`${baseUrl}/blogs/${id}`, {
-  method: "GET",
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
-if (response.ok) {
-  const blogData: BlogData = await response.json();
-  initialLikes = blogData.likes;
-  initialComments = blogData.comments;
-}
+
 ---
 
 <Layout>
@@ -67,15 +54,6 @@ if (response.ok) {
     </div>
   </article>
   {
-    commentable && (
-      <div class={styles["like-and-comment"]}>
-        <LikeManager initialLikes={initialLikes} id={id} client:only="react" />
-        <CommentManager
-          id={id}
-          comments={initialComments}
-          client:only="react" 
-        />
-      </div>
-    )
+    commentable && <BlogInteractionManager baseUrl={baseUrl} id={id} client:only="react"/>
   }
 </Layout>

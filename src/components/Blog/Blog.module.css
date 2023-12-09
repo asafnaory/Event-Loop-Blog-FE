@@ -51,9 +51,3 @@
     width: 50%;
     color: var(--color-text-on-primary);
 }
-.like-and-comment{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}

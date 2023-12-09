@@ -3,7 +3,7 @@ import { string } from "astro/zod";
 import Blog from "../../components/Blog/Blog.astro";
 import Card from "../../components/Card/Card.astro";
 import styles from "./EventsWrapper.module.css";
-import { getCollection, type CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
 const events = await getCollection("events") || [];
 const { frontmatter } = Astro.props;
 ---
@@ -16,7 +16,7 @@ const { frontmatter } = Astro.props;
   <slot />
   <div class={styles["events-wrapper"]}>
     {
-      events.map((event) =>  { event && <Card
+      events.map((event) => event && <Card
         fullOrRlativeRedirect="full"
         tags={event.data.tags}
         link={event.data.link}
@@ -25,7 +25,7 @@ const { frontmatter } = Astro.props;
         thirdTitle={event.data.where}
         mainImage={event.data.image}
         /> 
-      })
+      )
     }
   </div>
 </Blog>

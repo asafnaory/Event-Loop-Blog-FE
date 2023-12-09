@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import BlogsPage from "../components/BlogsPage/BlogsPage.astro";
 import { subjectsList } from "./subjects-list";
+export const prerender = true;
 export const getStaticPaths = async () => {
     
     return subjectsList.map((subject) => {
@@ -24,6 +25,6 @@ type Props = {
 };
 const { subject } = Astro.props;
 const allBlogs = await getCollection("blogs");
-const subjectBlogs = allBlogs.filter((blog) => blog?.data?.tags.includes(subject.name)) || [];
+const subjectBlogs = allBlogs.filter((blog) => blog?.data?.tags.includes(subject?.name)) || [];
 ---
-<BlogsPage blogs={subjectBlogs} name={subject.name} />
+<BlogsPage blogs={subjectBlogs} name={subject?.name} />

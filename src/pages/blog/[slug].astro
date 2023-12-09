@@ -1,6 +1,7 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
 import Blog from "../../components/Blog/Blog.astro";
+export const prerender = true;
 export const getStaticPaths = async () => {
   const blogs = await getCollection("blogs");
   return blogs.map((blog) => {

@@ -6,5 +6,5 @@ import { subjectsList } from "./subjects-list.ts";
 ---
 
 <Home>
-  {subjectsList.map((subject) => <Icon link={subject.link} image={subject.image} alt={subject.name} />)}
+  {subjectsList.map((subject) => <Icon link={subject.link} image={subject.image} alt={subject?.name} />)}
 </Home>

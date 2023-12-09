@@ -1,9 +1,9 @@
-import NESTJS from "../../public/nestjs.svg";
-import REACT from "../../public/react-2.svg";
-import NODEJS from "../../public/nodejs.svg";
-import TYPESCRIPT from "../../public/typescript.svg";
-import JS from "../../public/logo-javascript.svg";
-import COPILOT from "../../public/copilot.png";
+import NESTJS from "../images/nestjs.svg";
+import REACT from "../images/react-2.svg";
+import NODEJS from "../images/nodejs.svg";
+import TYPESCRIPT from "../images/typescript.svg";
+import JS from "../images/logo-javascript.svg";
+import COPILOT from "../images/copilot.png";
 
 export const subjectsList = [
     {

@@ -1,27 +1,21 @@
 // 1. Import utilities from `astro:content`
 import { z, defineCollection } from 'astro:content';
 
-const uuidRegex = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/;
-
-const uuidSchema = z.string().refine(value => uuidRegex.test(value), {
-  message: "Invalid UUID",
-});
-
 const blogsCollection = defineCollection({
   type: 'content', 
-  schema: z.object({
+  schema:({ image }) => z.object({
     id: z.string(),
     author: z.string(),
     title: z.string(),
     tags: z.array(z.string()),
-    image: z.string(),
-    authorImage: z.string().optional()
-  }),
+    image: image().refine((img) => img),
+    authorImage: image().refine((img) => img),
+   }),
 });
 
 const eventsCollection = defineCollection({
   type: 'content', 
-  schema: z.object({
+  schema:({ image }) => z.object({
     id: z.string(),
     tags: z.array(z.string()),
     link: z.string(),
@@ -29,7 +23,7 @@ const eventsCollection = defineCollection({
     date: z.string(),
     time: z.string(),
     where: z.string(),
-    image: z.string(),
+    image: image().refine((img) => img),
   }),
 });
 
