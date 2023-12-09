@@ -7,8 +7,7 @@ type CommentManagerProps = {
 }
 
 export default function CommentManager({ comments, id }: CommentManagerProps): JSX.Element {
-    // const baseUrl = process.env.PUBLIC_BASE_URL;
-    const baseUrl = 'http://localhost:3000'
+    const baseUrl = process.env.PUBLIC_BASE_URL;
     const [comment, setComment] = useState('');
     const [error, setError] = useState(false);
 

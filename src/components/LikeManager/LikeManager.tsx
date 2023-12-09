@@ -9,8 +9,7 @@ interface LikeManagerProps {
 }
 
 export default function LikeManager({ initialLikes = 0, id }: LikeManagerProps): JSX.Element {
-    // const baseUrl = process.env.PUBLIC_BASE_URL;
-    const baseUrl = 'http://localhost:3000'
+    const baseUrl = process.env.PUBLIC_BASE_URL;
     const [isLiked, setIsLiked] = useLocalStorage(id, false)
     const [likes, setLikes] = useState(initialLikes);
 
