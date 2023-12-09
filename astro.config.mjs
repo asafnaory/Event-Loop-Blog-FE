@@ -1,15 +1,12 @@
 import { defineConfig } from 'astro/config';
 import react from "@astrojs/react";
 import mdx from "@astrojs/mdx";
+import { loadEnv } from "vite";
+const { PORT } = loadEnv(process.env.NODE_ENV, process.cwd(), "");
 
-import node from "@astrojs/node";
-
-// https://astro.build/config
+const port =  Number(PORT) ||  4321
+console.log(`Port: ${port}`, PORT);
 export default defineConfig({
-  // server: { port: 1234, host: true},
+  server: { port, host: '0.0.0.0'},
   integrations: [react(), mdx()],
-  // output: "server",
-  // adapter: node({
-  //   mode: "standalone"
-  // })
 });
