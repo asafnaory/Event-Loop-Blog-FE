@@ -2,7 +2,7 @@
 layout: ../layouts/EventsWrapper/EventsWrapper.astro
 title: Where can you meet me?
 author: Asaf Naory 
-image: /public/me.png
+image: /me.png
 ---
 
 Hello and a warm welcome to all my readers! This is the go-to spot for finding out where you can meet me in person. 

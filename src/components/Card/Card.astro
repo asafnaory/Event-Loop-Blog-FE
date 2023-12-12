@@ -2,10 +2,11 @@
 import { Image } from "astro:assets";
 import styles from "./Card.module.css";
 import TagList from "./TagList/TagList.astro";
+import type { ImageType } from "../types";
 type Props = {
   mainTitle: string;
   link: string;
-  mainImage: string;
+  mainImage: ImageType;
   tags: string[];
   secondTitle?: string;
   thirdTitle?: string;
@@ -30,7 +31,7 @@ const hrefLink =
   <a href={hrefLink} class={styles["card"]}>
     <Image
       class={styles["card-img"]}
-      src={mainImage}
+      src={mainImage.src}
       alt={mainTitle}
       width="472"
       height="235"

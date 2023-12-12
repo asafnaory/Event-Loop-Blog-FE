@@ -36,8 +36,9 @@ export default function BlogInteractionManager({baseUrl, id}: BlogInteractionMan
   
   return (
     <div className={styles["like-and-comment"]}>
-      <LikeManager initialLikes={initialLikes} id={id}/>
+      <LikeManager baseUrl={baseUrl} initialLikes={initialLikes} id={id}/>
       <CommentManager
+        baseUrl={baseUrl} 
         id={id}
         comments={initialComments}
         />

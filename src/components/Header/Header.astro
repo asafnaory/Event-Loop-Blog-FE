@@ -5,10 +5,9 @@ let currentPath = Astro.url.pathname;
 ---
 
 <header class={styles["header"]}>
-    <!-- <Image class={styles["event-loop-image"]} src={EVENT_LOOP} alt="EVENT LOOP" width={200} height={200}/> -->
   <ul class={styles["link-list"]}>
     <a href="/" class={`${styles.link} ${currentPath === '/' ? styles.active : ''}`}><li>Home</li></a>
-    <a href="/blog" class={`${styles.link} ${currentPath === '/blog' ? styles.active : ''}`}><li>Blog</li></a>
-    <a href="/events" class={`${styles.link} ${currentPath === '/events' ? styles.active : ''}`}><li>Events</li></a>
+    <a href="/blog" class={`${styles.link} ${currentPath.includes("/blog") ? styles.active : ''}`}><li>Blog</li></a>
+    <a href="/events" class={`${styles.link} ${currentPath.includes('/events') ? styles.active : ''}`}><li>Events</li></a>
   </ul>
 </header>

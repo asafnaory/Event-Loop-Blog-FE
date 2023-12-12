@@ -5,11 +5,11 @@ import confetti from 'canvas-confetti';
 
 interface LikeManagerProps {
     id: string;
+    baseUrl: string;
     initialLikes?: number;
 }
 
-export default function LikeManager({ initialLikes = 0, id }: LikeManagerProps): JSX.Element {
-    const baseUrl = process.env.PUBLIC_BASE_URL;
+export default function LikeManager({ initialLikes = 0, id, baseUrl }: LikeManagerProps): JSX.Element {
     const [isLiked, setIsLiked] = useLocalStorage(id, false)
     const [likes, setLikes] = useState(initialLikes);
 

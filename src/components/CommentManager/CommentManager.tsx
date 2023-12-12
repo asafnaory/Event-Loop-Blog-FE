@@ -4,10 +4,10 @@ import styles from './CommentManager.module.css';
 type CommentManagerProps = {
     comments: string[];
     id: string;
+    baseUrl: string;
 }
 
-export default function CommentManager({ comments, id }: CommentManagerProps): JSX.Element {
-    const baseUrl = process.env.PUBLIC_BASE_URL;
+export default function CommentManager({ comments, id, baseUrl }: CommentManagerProps): JSX.Element {
     const [comment, setComment] = useState('');
     const [error, setError] = useState(false);
 

@@ -2,9 +2,8 @@
 import styles from "./Blog.module.css";
 import { Image } from "astro:assets";
 import Layout from "../../layouts/ComponentsLayout/Layout.astro";
-import LikeManager from "../LikeManager/LikeManager.tsx";
-import CommentManager from "../CommentManager/CommentManager";
 import BlogInteractionManager from "../BlogInteractionManager/BlogInteractionManager";
+import type { ImageType } from "../types";
 const baseUrl = import.meta.env.PUBLIC_BASE_URL;
 
 
@@ -12,12 +11,7 @@ type ImageSrc = { height: number; src: string; width: number; format: "avif" | "
 
 type BlogProps = {
   title: string;
-  image: {
-    src: ImageSrc;
-    alt: string;
-    width: number;
-    height: number;
-  };
+  image: ImageType;
   author: string;
   tags: string[];
 };
