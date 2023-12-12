@@ -21,7 +21,7 @@ export default function CommentManager({ comments, id, baseUrl }: CommentManager
         comments.push(comment);
         setComment('');
       
-        const response = await fetch(`${baseUrl}/blogs/${id}`, {
+        const response = await fetch(`event-loop-blog-be.railway.internal/blogs/${id}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
