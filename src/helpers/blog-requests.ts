@@ -8,7 +8,10 @@ type BlogData = {
 };
 
 function setEndpoint(id: string) {
-  return `${baseUrl}/blogs/${id}`;
+  console.log('baseUrl:', baseUrl);
+  const res = `${baseUrl}/blogs/${id}`;
+  console.log('url: ',res); 
+  return res;
 }
 
 export async function addComment(body: unknown, id: string): Promise<{status: number}> {

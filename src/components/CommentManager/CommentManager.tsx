@@ -5,10 +5,9 @@ import { addComment } from '../../helpers/blog-requests';
 type CommentManagerProps = {
     comments: string[];
     id: string;
-    baseUrl: string;
 }
 
-export default function CommentManager({ comments, id, baseUrl }: CommentManagerProps): JSX.Element {
+export default function CommentManager({ comments, id }: CommentManagerProps): JSX.Element {
     const [comment, setComment] = useState('');
     const [error, setError] = useState(false);
 
