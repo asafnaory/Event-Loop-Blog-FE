@@ -1,4 +1,9 @@
 const baseUrl = import.meta.env.PUBLIC_BASE_URL || process.env.PUBLIC_BASE_URL;
+console.log('baseUrl:', baseUrl);
+console.log('import PUBLIC_BASE_URL:', import.meta.env.PUBLIC_BASE_URL);
+console.log('process PUBLIC_BASE_URL:', process.env.PUBLIC_BASE_URL);
+
+
 type BlogData = {
   id: string;
   createdAt: string;
@@ -8,7 +13,6 @@ type BlogData = {
 };
 
 function setEndpoint(id: string) {
-  console.log('baseUrl:', baseUrl);
   const res = `${baseUrl}/blogs/${id}`;
   console.log('url: ',res); 
   return res;
