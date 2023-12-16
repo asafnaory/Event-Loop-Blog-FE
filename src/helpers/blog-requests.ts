@@ -1,4 +1,4 @@
-const baseUrl = import.meta.env.PUBLIC_BASE_URL;
+const baseUrl = import.meta.env.PUBLIC_BASE_URL || process.env.PUBLIC_BASE_URL;
 type BlogData = {
   id: string;
   createdAt: string;
