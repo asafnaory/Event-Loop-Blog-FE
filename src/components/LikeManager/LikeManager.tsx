@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styles from './LikeManager.module.css';
 import { useLocalStorage } from '../react-hooks/useLocalStorage';
 import confetti from 'canvas-confetti';
+import { addLike } from '../../helpers/blog-requests';
 
 interface LikeManagerProps {
     id: string;
@@ -22,20 +23,12 @@ export default function LikeManager({ initialLikes = 0, id, baseUrl }: LikeManag
         const newLikes = likes + 1;
         setLikes(newLikes);
         setIsLiked(true);
-    
-       const response = await fetch(`${baseUrl}/blogs/${id}`, {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            likes: newLikes,
-          }),
-        });
-        if (response.status !== 204) {
+        try{
+            await addLike(newLikes, id);
+        }
+        catch(e){
           setLikes(likes);
         }
-
       };
 
     return (

@@ -3,15 +3,11 @@ import styles from "./Blog.module.css";
 import { Image } from "astro:assets";
 import Layout from "../../layouts/ComponentsLayout/Layout.astro";
 import BlogInteractionManager from "../BlogInteractionManager/BlogInteractionManager";
-import type { ImageType } from "../types";
 const baseUrl = import.meta.env.PUBLIC_BASE_URL;
-
-
-type ImageSrc = { height: number; src: string; width: number; format: "avif" | "png" | "webp" | "jpeg" | "jpg" | "svg" | "tiff" | "gif"};
 
 type BlogProps = {
   title: string;
-  image: ImageType;
+  image: ImageMetadata;
   author: string;
   tags: string[];
 };
@@ -33,10 +29,8 @@ const commentable = (Astro.props as CommentableBlogProps).commentable;
   <article class={styles.card}>
     <Image
       class={styles["card-img"]}
-      src={image.src}
-      alt={image.alt}
-      width={image.width}
-      height={image.height}
+      src={image}
+      alt={title}
     />
     <h2 class={styles["card-title"]}>{title}</h2>
     <p class={styles["card-author"]}>By {author}</p>

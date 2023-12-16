@@ -6,10 +6,16 @@
     width: 800px;
     margin-bottom: 30px;
 }
-.comment-form {
+/* .comment-form {
     margin: 10px;
     display: flex;
     align-items: flex-start;
+} */
+
+.comment-input-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
 }
 
 .comment-textarea {
@@ -20,6 +26,8 @@
     flex-grow: 1;
     padding-left: 10px;
     padding-top: 10px;
+    margin-top: 10px;
+    margin-left: 10px;
 }
 
 .comment-button {
@@ -31,6 +39,7 @@
     cursor: pointer;
     height: 30px;
     width: 60px;
+    margin-right: 5px;
 }
 
 .comments-display {

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styles from './CommentManager.module.css';
+import { addComment } from '../../helpers/blog-requests';
 
 type CommentManagerProps = {
     comments: string[];
@@ -17,20 +18,13 @@ export default function CommentManager({ comments, id, baseUrl }: CommentManager
           setError(true);
           return;
         }
-
         comments.push(comment);
         setComment('');
-      
-        const response = await fetch(`event-loop-blog-be.railway.internal/blogs/${id}`, {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            comments: comments,
-          }),
-        });
-        if (response.status !== 204) {
+
+        try{
+           await addComment(comment, id);
+        }
+        catch(e){
           comments.pop();
         }
       };
@@ -38,16 +32,18 @@ export default function CommentManager({ comments, id, baseUrl }: CommentManager
       return (
         <div className={styles['comment-wrapper']}>
           <form onSubmit={handleSubmit} className={styles["comment-form"]}>
-            <textarea
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-              onFocus={() => setError(false)}
-              className={styles["comment-textarea"]}
-              placeholder={'Add a comment...'}
-            />
-            <button type="submit" className={styles["comment-button"]}>
-              &#8594;
-            </button>
+            <div className={styles["comment-input-area"]}>
+              <textarea
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                onFocus={() => setError(false)}
+                className={styles["comment-textarea"]}
+                placeholder={'Add a comment...'}
+              />
+              <button type="submit" className={styles["comment-button"]}>
+                Add
+              </button>
+            </div>
           </form>
           {error && <p className={styles['comment-error']}>You forgot to add the comment text.</p>}
           <div className={styles["comments-display"]}>

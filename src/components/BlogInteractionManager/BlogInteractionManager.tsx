@@ -2,15 +2,13 @@ import { useEffect, useState } from "react"
 import LikeManager from "../LikeManager/LikeManager";
 import CommentManager from "../CommentManager/CommentManager";
 import styles from "./BlogInteractionManager.module.css";
+import { getBlogDataByBlogId } from "../../helpers/blog-requests";
 
 interface BlogInteractionManagerProps {
   baseUrl: string;
   id: string;
 }
-interface BlogData {
-  likes: number;
-  comments: string[];
-}
+
 
 export default function BlogInteractionManager({baseUrl, id}: BlogInteractionManagerProps) {
   const [initialLikes, setInitialLikes] = useState(0);
@@ -18,18 +16,11 @@ export default function BlogInteractionManager({baseUrl, id}: BlogInteractionMan
 
   useEffect(() => {
     const fetchBlogData = async () => {
-  const response = await fetch(`${baseUrl}/blogs/${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    
-      if (response.ok) {
-        const blogData: BlogData = await response.json();
-        setInitialLikes(blogData.likes);
-        setInitialComments(blogData.comments);
-      }
+      const response = await getBlogDataByBlogId(id)    
+      const blogData = await response;
+      setInitialLikes(blogData.likes);
+      setInitialComments(blogData.comments);
+      console.log(blogData.comments);
     };
     fetchBlogData();
   }, [])

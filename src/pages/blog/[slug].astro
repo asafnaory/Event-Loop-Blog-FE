@@ -23,6 +23,6 @@ const { blog } = Astro.props;
 const { Content } = await blog.render();
 ---
 
-<Blog commentable={true} id={blog.data.id} image={{ src: blog.data.image, alt: "article image", width: 600, height: 600 / 2 }} title={blog.data.title} author={blog.data.author} tags={blog.data.tags}>
+<Blog commentable={true} id={blog.data.id} image={blog.data.image} title={blog.data.title} author={blog.data.author} tags={blog.data.tags}>
   <Content />
 </Blog>

@@ -23,7 +23,7 @@ const eventsCollection = defineCollection({
     date: z.string(),
     time: z.string(),
     where: z.string(),
-    image: image().refine((img) => img),
+    image: image().optional().refine((img) => img),
   }),
 });
 

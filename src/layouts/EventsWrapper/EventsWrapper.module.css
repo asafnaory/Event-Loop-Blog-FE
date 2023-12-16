@@ -5,3 +5,13 @@
     justify-content: center;
     gap: 40px;
 }
+
+.events-message {
+    text-align: center;
+    color: var(--color-text-on-primary);
+    font-size: 1.2em;
+    padding: 20px;
+    background-color: var(--comment-like-background-color);
+    border-radius: 5px;
+    margin-top: 20px;
+  }

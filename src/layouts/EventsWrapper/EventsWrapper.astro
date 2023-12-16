@@ -3,28 +3,36 @@ import Blog from "../../components/Blog/Blog.astro";
 import Card from "../../components/Card/Card.astro";
 import styles from "./EventsWrapper.module.css";
 import { getCollection } from "astro:content";
-const events = await getCollection("events") || [];
+import ME from '../../../public/me.png'
+const events = await getCollection('events') || [];
 const { frontmatter } = Astro.props;
+
 ---
 
 <Blog
   title={frontmatter.title}
-  image={{ src: frontmatter.image, alt: "my image", width: 500, height: 500 }}
+  image={ME}
   author={frontmatter.author}
   tags={[]}>
   <slot />
   <div class={styles["events-wrapper"]}>
-    {
-      events.map((event) => event && <Card
-        fullOrRlativeRedirect="full"
-        tags={event.data.tags}
-        link={event.data.link}
-        mainTitle={event.data.about}
-        secondTitle={`${event.data.date} - ${event.data.time}`}
-        thirdTitle={event.data.where}
-        mainImage={{ src: frontmatter.image, alt: "my image", width: 500, height: 500 }} 
+    {events.length > 0 ? 
+      events.map((event) => 
+        event && <Card
+          fullOrRlativeRedirect="full"
+          tags={event.data.tags}
+          link={event.data.link}
+          mainTitle={event.data.about}
+          secondTitle={`${event.data.date} - ${event.data.time}`}
+          thirdTitle={event.data.where}
+          mainImage={ME} 
         /> 
       )
+        : <div class={styles["events-message"]}>
+              <p>
+                There are no events planned soon
+              </p> 
+            </div>
     }
   </div>
 </Blog>

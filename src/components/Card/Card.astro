@@ -6,11 +6,11 @@ import type { ImageType } from "../types";
 type Props = {
   mainTitle: string;
   link: string;
-  mainImage: ImageType;
+  mainImage: ImageMetadata;
   tags: string[];
   secondTitle?: string;
   thirdTitle?: string;
-  authorImage?: string;
+  authorImage?: ImageMetadata;
   fullOrRlativeRedirect: "full" | "relative";
 };
 const {
@@ -31,7 +31,7 @@ const hrefLink =
   <a href={hrefLink} class={styles["card"]}>
     <Image
       class={styles["card-img"]}
-      src={mainImage.src}
+      src={mainImage}
       alt={mainTitle}
       width="472"
       height="235"

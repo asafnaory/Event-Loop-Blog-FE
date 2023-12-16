@@ -1,46 +1,64 @@
-import type { Categories } from "../components/NewBlog/NewBlog";
-import type { BlogResponse } from "../types";
-const baseUrl = process.env.PUBLIC_BASE_URL;
-const url = `${baseUrl}/blogs`;
-// const httpClient = fetch;
-type Blog = {
-  title: string;
-  content: string;
-  categories: Categories;
+const baseUrl = import.meta.env.PUBLIC_BASE_URL;
+type BlogData = {
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+  comments: string[];
+  likes: number;
 };
 
-export async function getAllBlogs(): Promise<BlogResponse[] | undefined> {
-  try {
-    const responseJson = await fetch(url);
-    const response = await responseJson.json();
-    return response;
-  } catch (e) {
-    console.error(e);
-  }
+function setEndpoint(id: string) {
+  return `${baseUrl}/blogs/${id}`;
 }
-export async function getBlogsByCategories(categories: string[]) {
-  try {
-    const responseJson = await fetch(`${url}?categories=${categories}`);
-    const response = await responseJson.json();
-    return response;
-  } catch (e) {
-    console.error(e);
+
+export async function addComment(body: unknown, id: string): Promise<{status: number}> {
+  const response = await fetch(setEndpoint(id), {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      comments: body,
+    }),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    console.error(errorData.message); 
+    throw new Error(`${errorData.message} - error code: ${response.status}`);
   }
+
+  return await response.json();
 }
-export async function createBlog(blogBody: Blog) {
-  try {
-    const responseJson = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(blogBody),
-    });
-    const response = await responseJson.json();
-    return response;
-  } catch (e) {
-    console.error(e);
+export async function addLike(body: unknown, id: string): Promise<{status: number}>{
+  const response = await fetch(`${baseUrl}/blogs/${id}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      likes: body,
+    }),
+  });
+  
+  if (!response.ok) {
+    const errorData = await response.json();
+    console.error(errorData.message); 
+    throw new Error(`${errorData.message} - error code: ${response.status}`);
   }
+
+  return await response.json()
 }
-export async function updateBlogs() {}
-export async function deleteBlog() {}
+
+export async function getBlogDataByBlogId( id: string): Promise<BlogData>{
+  const response = await fetch(setEndpoint(id), {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  if(!response.ok){
+    new Error("Something went wrong");
+  }
+  return await response.json();
+}
