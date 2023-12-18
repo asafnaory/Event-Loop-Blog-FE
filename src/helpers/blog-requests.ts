@@ -79,7 +79,7 @@ export async function getBlogDataByBlogId(id: string): Promise<DataOrError>{
     returnValue = {error:  new Error(`error code: ${response.status}`)}; 
   }
   else {
-    returnValue = {success: {status: await response.json()}}
+    returnValue = {success: {data: await response.json()}}
   }
   return returnValue as DataOrError;
 }
