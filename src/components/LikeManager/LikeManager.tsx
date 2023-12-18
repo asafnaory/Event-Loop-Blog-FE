@@ -23,11 +23,11 @@ export default function LikeManager({ initialLikes = 0, id, baseUrl }: LikeManag
         const newLikes = likes + 1;
         setLikes(newLikes);
         setIsLiked(true);
-        try{
-            await addLike(newLikes, id);
-        }
-        catch(e){
+        const response = await addLike(newLikes, id);
+        if('error' in response){
           setLikes(likes);
+          setIsLiked(false);
+          return;
         }
       };
 

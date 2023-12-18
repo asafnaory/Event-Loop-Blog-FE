@@ -19,12 +19,10 @@ export default function CommentManager({ comments, id }: CommentManagerProps): J
         }
         comments.push(comment);
         setComment('');
-
-        try{
-           await addComment(comment, id);
-        }
-        catch(e){
+        const response = await addComment(comment, id);
+        if('error' in response){
           comments.pop();
+          return;
         }
       };
 

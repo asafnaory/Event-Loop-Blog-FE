@@ -17,10 +17,15 @@ export default function BlogInteractionManager({baseUrl, id}: BlogInteractionMan
   useEffect(() => {
     const fetchBlogData = async () => {
       const response = await getBlogDataByBlogId(id)    
-      const blogData = await response;
-      setInitialLikes(blogData.likes);
-      setInitialComments(blogData.comments);
-      console.log(blogData.comments);
+      if('error' in response){
+        return;
+      }
+      if(response.success.data.likes){
+        setInitialLikes(response.success.data.likes);
+      }
+      if(response.success.data.comments){
+        setInitialComments(response.success.data.comments);
+      }
     };
     fetchBlogData();
   }, [])
