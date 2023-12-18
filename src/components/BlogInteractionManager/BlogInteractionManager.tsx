@@ -12,8 +12,8 @@ interface BlogInteractionManagerProps {
 
 export default function BlogInteractionManager({baseUrl, id}: BlogInteractionManagerProps) {
   console.log('BlogInteractionManager rendered!');
-  const [initialLikes, setInitialLikes] = useState(0);
-  const [initialComments, setInitialComments] = useState<string[]>([]);
+  const [likes, setLikes] = useState(0);
+  const [comments, setComments] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchBlogData = async () => {
@@ -22,10 +22,10 @@ export default function BlogInteractionManager({baseUrl, id}: BlogInteractionMan
         return;
       }
       if(response.success.data.likes){
-        setInitialLikes(response.success.data.likes);
+        setLikes(response.success.data.likes);
       }
       if(response.success.data.comments){
-        setInitialComments(response.success.data.comments);
+        setComments(response.success.data.comments);
       }
       console.log('BlogInteractionManager fetched blog data!', response.success.data.comments, response.success.data.likes);
       
@@ -35,10 +35,11 @@ export default function BlogInteractionManager({baseUrl, id}: BlogInteractionMan
   
   return (
     <div className={styles["like-and-comment"]}>
-      <LikeManager baseUrl={baseUrl} initialLikes={initialLikes} id={id}/>
+      <LikeManager baseUrl={baseUrl} likes={likes} setLikes={setLikes} id={id}/>
       <CommentManager
           id={id}
-          comments={initialComments}
+          comments={comments}
+          setComments={setComments}
         />
     </div>
   ) 

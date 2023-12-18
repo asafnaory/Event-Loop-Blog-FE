@@ -7,12 +7,12 @@ import { addLike } from '../../helpers/blog-requests';
 interface LikeManagerProps {
     id: string;
     baseUrl: string;
-    initialLikes?: number;
+    likes: number;
+    setLikes: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export default function LikeManager({ initialLikes = 0, id, baseUrl }: LikeManagerProps): JSX.Element {
+export default function LikeManager({likes, setLikes, id }: LikeManagerProps): JSX.Element {
     const [isLiked, setIsLiked] = useLocalStorage(id, false)
-    const [likes, setLikes] = useState(initialLikes);
 
     const handleLike = async () => {
       confetti({

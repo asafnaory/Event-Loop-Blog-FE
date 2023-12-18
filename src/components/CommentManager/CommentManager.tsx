@@ -4,24 +4,25 @@ import { addComment } from '../../helpers/blog-requests';
 
 type CommentManagerProps = {
     comments: string[];
+    setComments: React.Dispatch<React.SetStateAction<string[]>>;
     id: string;
 }
 
-export default function CommentManager({ comments, id }: CommentManagerProps): JSX.Element {
-    const [comment, setComment] = useState('');
+export default function CommentManager({ setComments, comments, id }: CommentManagerProps): JSX.Element {
+    const [currentComment, setCurrentComment] = useState('');
     const [error, setError] = useState(false);
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
-        if(!comment.trim()){
+        if(!currentComment.trim()){
           setError(true);
           return;
         }
-        comments.push(comment);
-        setComment('');
-        const response = await addComment(comment, id);
+        setComments((prevComments: string[]) => [...prevComments, currentComment]);
+        setCurrentComment('');
+        const response = await addComment(currentComment, id);
         if('error' in response){
-          comments.pop();
+          setComments((prevComments: string[]) => prevComments.slice(0, prevComments.length - 1));
           return;
         }
       };
@@ -31,8 +32,8 @@ export default function CommentManager({ comments, id }: CommentManagerProps): J
           <form onSubmit={handleSubmit} className={styles["comment-form"]}>
             <div className={styles["comment-input-area"]}>
               <textarea
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
+                value={currentComment}
+                onChange={(e) => setCurrentComment(e.target.value)}
                 onFocus={() => setError(false)}
                 className={styles["comment-textarea"]}
                 placeholder={'Add a comment...'}
