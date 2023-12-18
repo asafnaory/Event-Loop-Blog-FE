@@ -55,7 +55,7 @@
   }
 } */
 
-@media (max-width: 1200px) {
+@media (max-width: 1000px) {
   .header{
     height: 80px;
     border-bottom: 7px solid var(--inactive-link-color);

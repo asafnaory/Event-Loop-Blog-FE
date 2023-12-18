@@ -56,7 +56,7 @@
         color: var(--color-text-on-primary);
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1000px) {
     .card-title {
         font-size: 1.2em;
         text-align: center;
