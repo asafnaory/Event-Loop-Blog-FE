@@ -11,6 +11,7 @@ interface BlogInteractionManagerProps {
 
 
 export default function BlogInteractionManager({baseUrl, id}: BlogInteractionManagerProps) {
+  console.log('BlogInteractionManager rendered!');
   const [initialLikes, setInitialLikes] = useState(0);
   const [initialComments, setInitialComments] = useState<string[]>([]);
 
