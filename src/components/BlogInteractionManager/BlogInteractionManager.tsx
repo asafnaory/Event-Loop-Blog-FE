@@ -27,6 +27,8 @@ export default function BlogInteractionManager({baseUrl, id}: BlogInteractionMan
       if(response.success.data.comments){
         setInitialComments(response.success.data.comments);
       }
+      console.log('BlogInteractionManager fetched blog data!', response.success.data.comments, response.success.data.likes);
+      
     };
     fetchBlogData();
   }, [])
