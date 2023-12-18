@@ -1,6 +1,9 @@
 const baseUrl = import.meta.env.PUBLIC_BASE_URL || process.env.PUBLIC_BASE_URL;
 console.log('baseUrl:', baseUrl);
 console.log('import PUBLIC_BASE_URL:', import.meta.env.PUBLIC_BASE_URL);
+console.log('import.meta.env.MODE:', import.meta.env.MODE);
+console.log('import.meta.env.PROD:', import.meta.env.PROD);
+console.log('import.meta.env.SITE:', import.meta.env.SITE);
 
 
 type BlogData = {
