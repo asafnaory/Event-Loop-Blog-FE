@@ -1,4 +1,5 @@
 import { baseUrl } from "../config/config";
+console.log('baseUrl:', baseUrl);
 
 type BlogData = {
   id: string;
