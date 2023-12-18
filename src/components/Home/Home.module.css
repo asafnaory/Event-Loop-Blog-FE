@@ -119,22 +119,30 @@
 
   @media (max-width: 1000px) {
     .title {
-      font-size: 1em;
+      font-size: 2em;
     }
     
     .sub-title {
-      font-size: 1.5em;
+      font-size: 2em;
     }
   
     .general-text {
-      font-size: 0.8em;
+      font-size: 2em;
     }
 
     .icon-wrapper {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       flex-wrap: wrap;
+      width: 600px;
+      justify-content: space-between;
       align-items: center;
-      animation: fadeIn 2s ease-in-out forwards;
+    }
+    .about-me-text {
+      font-size: 2.5em;
+    }
+    .my-image {
+      width: 450px;
+      height: 350px;
     }
   }

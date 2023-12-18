@@ -1,17 +1,31 @@
 .events-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 40px;
+}
+
+@media (max-width: 1000px) {
+    .events-wrapper {
+        gap: 20px;
+    }
 }
 
 .events-message {
-    text-align: center;
-    color: var(--color-text-on-primary);
-    font-size: 1.2em;
-    padding: 20px;
-    background-color: var(--comment-like-background-color);
-    border-radius: 5px;
-    margin-top: 20px;
-  }
+        text-align: center;
+        color: var(--color-text-on-primary);
+        font-size: 1.2em;
+        padding: 20px;
+        background-color: var(--comment-like-background-color);
+        border-radius: 5px;
+        margin-top: 20px;
+}
+
+@media (max-width: 1000px) {
+    .events-message {
+        font-size: 2.5em;
+        padding: 10px;
+        margin-top: 10px;
+    }
+}
