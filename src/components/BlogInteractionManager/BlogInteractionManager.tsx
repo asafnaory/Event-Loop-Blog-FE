@@ -32,7 +32,7 @@ export default function BlogInteractionManager({baseUrl, id}: BlogInteractionMan
       
     };
     fetchBlogData();
-  }, [])
+  }, [comments, commenterName])
   
   return (
     <div className={styles["like-and-comment"]}>
