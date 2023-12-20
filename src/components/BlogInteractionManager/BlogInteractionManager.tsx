@@ -14,6 +14,7 @@ export default function BlogInteractionManager({baseUrl, id}: BlogInteractionMan
   console.log('BlogInteractionManager rendered!');
   const [likes, setLikes] = useState(0);
   const [comments, setComments] = useState<string[]>([]);
+  const [commenterName, setCommenterName] = useState<string>();
 
   useEffect(() => {
     const fetchBlogData = async () => {
@@ -40,6 +41,8 @@ export default function BlogInteractionManager({baseUrl, id}: BlogInteractionMan
           id={id}
           comments={comments}
           setComments={setComments}
+          commenterName={commenterName}
+          setCommenterName={setCommenterName}
         />
     </div>
   ) 
