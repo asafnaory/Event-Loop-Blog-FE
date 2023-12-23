@@ -1,0 +1,140 @@
+---
+id: 'b5848361-2f68-4e83-a6fe-748bf907f4cf'
+author: Asaf Naory
+title: "Understanding what's behind Wat"
+tags: ['javascript']
+date: December 10 2023
+image: '../../../public/Wat8.jpeg'
+authorImage: '../../../public/AsafNaory2.png'
+---
+import CenteredDiv from '../../components/CenterDiv/CenterDiv';
+
+Many of you may be familiar with the video **Wat by Gary Bernhardt**, but if you are not, 
+I highly recommend checking it out. It showcases some of the oddities of JavaScript. 
+In this article, I will try to explain some of the phenomena presented in the video.
+
+
+<CenteredDiv>
+    ![Alt text for your image](/wat.png)
+</CenteredDiv>
+<CenteredDiv>
+[You can click here to go to the video](https://www.destroyallsoftware.com/talks/wat)
+</CenteredDiv>
+
+Firstly, JavaScript is a weakly typed language.
+
+
+This means that the type of a variable can change at runtime. This is why JavaScript employs *Type Coercion*.
+
+*Type Coercion* refers to the automatic or implicit conversion of values from one data type to another.
+
+Now, let's break down the rules of the + operator.
+
+# The + Operator
+### Primitives: 
+1. If both operands are numbers, they are added.
+2. If both operands are strings, they are concatenated.
+3. If either operand is a string, the other is converted to a string and concatenated.
+
+### Non-Primitives
+#### Objects
+4. If JavaScript interprets the operand as an object, it first tries to convert it to a number, which usually fails, then tries to convert it to a string.
+
+* Not related to the + operator specifically, but for clarification - if the left operand is `{}`, JavaScript actually treats it as a block scope, not as an object. It reads and ignores it in the context of the + operator. To have JavaScript interpret it as an object, you need to wrap it with parentheses `({})`.
+
+#### Arrays
+5. If one of the operands is an array, it is converted to a string and concatenated.
+
+
+Now, let's analyze the code from the video with this in mind.
+<CenteredDiv>
+![Alt text for your image](/wat-1.png)
+</CenteredDiv>
+```javascript
+[] + [] // ""
+```
+The two arrays are converted to empty strings and then concatenated, resulting in an empty string.
+
+```javascript
+[] + {} // "[object Object]"
+```
+The first array is converted to an empty string and concatenated with the string representation of the object, which is `[object Object]`.
+
+```javascript
+{} + [] // 0
+```
+Here, `{}` is not an object but a block scope, so we essentially have `+[]`, which is syntactic sugar for `Number([])` or `Number('')`, resulting in `0`.
+
+```javascript
+{} + {} // NaN
+```
+Similarly, the first `{}` is a block scope, and the second `{}` is an object. The expression effectively becomes `Number({})`, which results in NaN.
+
+
+Let's move on to the second part of the video.
+
+<CenteredDiv>
+![Alt text for your image](/wat-2.png)
+</CenteredDiv>
+
+Understanding the `Array.join()` method is crucial here.
+
+The `join()` method creates and returns a new string by concatenating all elements in an array (or an array-like object), 
+separated by commas or a specified separator string (remember this). 
+If the array has only one item, then that item will be returned without using the separator.
+
+For example:
+```javascript
+const elements = ['Fire', 'Air', 'Water'];
+console.log(elements.join());
+//output: "Fire,Air,Water"
+```
+
+```javascript
+const elements = ['Fire', 'Air', 'Water'];
+console.log(elements.join('-'));
+//output: "Fire-Air-Water"
+```
+So, with that in mind, let's read the code from the video.
+
+```javascript
+Array(16)
+//output: [ <16 empty items> ]
+```
+
+In older JavaScript environments, this might have printed 16 commas, but in modern JavaScript, it prints `[ <16 empty items> ]`, an array with 16 empty items.
+
+```javascript
+Array(16).join('wat')
+//output: "watwatwatwatwatwatwatwatwatwatwatwatwatwatwatwat
+```
+Here, we have an array with 16 empty items, and we join them with the string `'wat'`, adding `'wat'` between each item.
+
+```javascript
+Array(16).join('wat' +1);
+//output: "wat1wat1wat1wat1wat1wat1wat1wat1wat1wat1wat1wat1wat1wat1"
+```
+Here, we have an array with 16 empty items and we join them with the string wat + 1 which as we know: when using the + operator if either operand is a string, convert the other one to a string and concatenate.
+So we have an array with 16 empty items and we join them with the string wat1 which means that we add wat1 between each item.
+
+```javascript
+Array(16).join('wat' -1) + ' Batman!'
+//output: "NaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaN Batman!"
+```
+Here, we have an array of 16 `'wat' - 1`. Here Javascript can not know how to *Type Coercion* either of the operands, so `'wat' - 1` evaluates to NaN.
+Then we concatenate the string Batman! to the end of the string.
+
+### To sum up:
+
+
+JavaScript is a weakly typed language, with the functionality of *Type Coercion*.
+JavaScript operators are not always intuitive, and sometimes they can be very confusing.
+
+
+You can read more about **the + operator** [here](https://262.ecma-international.org/5.1/#sec-11.6.1).
+
+
+You can read more about **the - operator** [here](https://262.ecma-international.org/5.1/#sec-11.6.2).
+
+
+Honestly, I hope this article was fun to read because I am not sure how useful it is.
