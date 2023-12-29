@@ -1,4 +1,4 @@
-@import url('../../layouts/ComponentsLayout/Layout.module.css');  
+@import url('../../styles/global.css');
 
 .page {
   display: flex;

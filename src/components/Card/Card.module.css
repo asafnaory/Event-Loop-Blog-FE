@@ -1,13 +1,4 @@
-@import url('../../layouts/ComponentsLayout/Layout.module.css');  
-
-/* card */
-/* card-link */
-/* card-img */
-/* main-title */
-/* card-data-wrapper */
-/* sub-title */
-/* sub-title */
-/* author-img */
+@import url('../../styles/global.css');
 
 .card {
     border: 2px solid var(--main-lighter-border-color);
