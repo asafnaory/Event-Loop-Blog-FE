@@ -11,11 +11,11 @@ console.log(`Port: ${port}`, PORT);
 
 // https://astro.build/config
 export default defineConfig({
-  output: 'server',
-  server: {
-    port,
-    host: '0.0.0.0'
-  },
+  // output: 'hy',
+  // server: {
+  //   port,
+  //   host: '0.0.0.0'
+  // },
   integrations: [react(), mdx()],
   adapter: node({
     mode: "standalone"
