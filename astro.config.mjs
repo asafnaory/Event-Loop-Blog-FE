@@ -10,7 +10,7 @@ const port = Number(PORT) || Number(process.env.PORT) || 4321;
 console.log(`Port: ${port}`, PORT);
 
 export default defineConfig({
-  output: "hybrid",
+  // output: "hybrid",
   integrations: [react(), mdx()],
   adapter: node({
     mode: "standalone"
