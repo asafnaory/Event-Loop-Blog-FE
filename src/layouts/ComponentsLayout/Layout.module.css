@@ -16,6 +16,40 @@
     --text-font-family: 'Open Sans', sans-serif;
 }
 
+.dark-theme {
+  /* Dark theme */
+  --main-bg-color: #0d0f18;
+  --main-lighter-bg-color: #131624;
+  --main-lighter-border-color: #131624f5;
+  --main-bg-color-hover: #0d1521f9;
+  --main-bg-color-image: #1f2630;
+  --color-primary: #020204;
+  --color-primary-hover:#007bff;
+  --color-text-on-primary: #FFF;
+  --editor-bg-color: #fefcfc;
+  --editor-text-color: #000;
+  --inactive-link-color: rgba(255, 255, 255, 0.657);
+  --active-link-color: #FFF;
+  --comment-like-background-color: #404663;
+}
+
+.light-theme {
+  /* Light theme */
+  --main-bg-color: #FFF;
+  --main-lighter-bg-color: #EEE;
+  --main-lighter-border-color: #CCC;
+  --main-bg-color-hover: #DDD;
+  --main-bg-color-image: #BBB;
+  --color-primary: #000;
+  --color-primary-hover: #007bff;
+  --color-text-on-primary: #000;
+  --editor-bg-color: #FFF;
+  --editor-text-color: #000;
+  --inactive-link-color: rgba(0, 0, 0, 0.657);
+  --active-link-color: #000;
+  --comment-like-background-color: #EEE;
+}
+
 
 .header {
     flex-shrink: 0;

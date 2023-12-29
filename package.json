@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^2.0.0",
-    "@astrojs/node": "^7.0.0",
+    "@astrojs/node": "^7.0.2",
     "@astrojs/react": "^3.0.7",
     "@fontsource-variable/source-code-pro": "^5.0.13",
     "@fontsource/anton": "^5.0.14",

@@ -2,8 +2,8 @@
 import { Image } from "astro:assets";
 import styles from "./Card.module.css";
 import TagList from "./TagList/TagList.astro";
-import type { ImageType } from "../types";
 type Props = {
+  id: string;
   mainTitle: string;
   link: string;
   mainImage: ImageMetadata;
@@ -14,6 +14,7 @@ type Props = {
   fullOrRlativeRedirect: "full" | "relative";
 };
 const {
+  id,
   mainTitle,
   secondTitle,
   thirdTitle,
@@ -30,11 +31,12 @@ const hrefLink =
 
   <a href={hrefLink} class={styles["card"]}>
     <Image
+      transition:name=`image-transition-${id}`
       class={styles["card-img"]}
       src={mainImage}
       alt={mainTitle}
-      width="472"
-      height="235"
+      width="500"
+      height="350"
     />
     <p class={styles["main-title"]}>{mainTitle}</p>
     <div class={styles["card-data-wrapper"]}>

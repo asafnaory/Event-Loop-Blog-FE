@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 let blogs = await getCollection("blogs");
 import BlogList from "../../components/BlogList/BlogList.astro";
+export const prerender = true;
 ---
 
 <BlogList blogs={blogs}/>

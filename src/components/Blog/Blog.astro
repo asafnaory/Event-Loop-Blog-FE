@@ -29,6 +29,8 @@ const commentable = (Astro.props as CommentableBlogProps).commentable;
 <Layout>
   <article class={styles.card}>
     <Image
+      transition:name=`image-transition-${id}`
+      transition:animate="initial"
       class={styles["card-img"]}
       src={image}
       alt={title}

@@ -3,14 +3,17 @@ import styles from './CommentManager.module.css';
 import { addComment } from '../../helpers/blog-requests';
 
 type CommentManagerProps = {
-    comments: string[];
+    comments: {
+      comment: string;
+      commenterName: string;
+    }[];
     setComments: React.Dispatch<React.SetStateAction<string[]>>;
     commenterName?: string;
     setCommenterName: React.Dispatch<React.SetStateAction<string| undefined>>;
     id: string;
 }
 
-export default function CommentManager({ setComments, comments,commenterName, setCommenterName, id }: CommentManagerProps): JSX.Element {
+export default function CommentManager({ setComments, comments, commenterName, setCommenterName, id }: CommentManagerProps): JSX.Element {
     const [currentComment, setCurrentComment] = useState('');
     const [error, setError] = useState<string | boolean>(false);
 

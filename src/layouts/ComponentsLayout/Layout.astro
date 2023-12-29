@@ -1,25 +1,25 @@
 ---
-import { ViewTransitions } from "astro:transitions";
-import "@fontsource/anton";
-import "@fontsource-variable/source-code-pro";
-import Header from "../../components/Header/Header.astro";
-import Footer from "../../components/Footer/Footer.astro";
-import styles from "./Layout.module.css";
+import '@fontsource/anton';
+import '@fontsource-variable/source-code-pro';
+import Header from '../../components/Header/Header.astro';
+import Footer from '../../components/Footer/Footer.astro';
+import styles from './Layout.module.css';
+import { ViewTransitions } from 'astro:transitions';
 ---
 
-<head class="header">
-  <link rel="icon" href="../../Saturn.png" />
-  <title>Event loop</title>
-  <ViewTransitions />
-</head>
-<body class={styles.body}>
-  <header>
+<html>
+  <head class="header">
+    <link rel="icon" href="../../Saturn.png" />
+    <title>Event loop</title>
+    <ViewTransitions />
+  </head>
+  <body class={styles.body}>
     <Header />
-  </header>
-  <main class={styles.main}>
-    <slot />
-  </main>
-  <footer class={styles.footer}>
-    <Footer />
-  </footer>
-</body>
+    <main class={styles.main} transition:animate="fade">
+      <slot />
+    </main>
+    <footer class={styles.footer}>
+      <Footer />
+    </footer>
+  </body>
+</html>

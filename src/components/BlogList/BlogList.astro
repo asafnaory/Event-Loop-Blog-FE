@@ -16,11 +16,12 @@ const { blogs } = Astro.props;
       {
         blogs.map((blog) => (
           <Card
+            id={blog.data.id}
             fullOrRlativeRedirect="relative"
             mainImage={blog.data.image}
             mainTitle={blog.data.title}
             secondTitle={`Written by: ${blog.data.author}`}
-            link={`/blog/${blog.slug}`}
+            link={`/blogs/${blog.slug}`}
             tags={blog.data.tags}
             authorImage={blog.data.authorImage}
           />

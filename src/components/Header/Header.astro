@@ -1,13 +1,14 @@
 ---
+import { ColorModeButton } from "../ColorModeButton/ColorModeButton";
 import styles from "./Header.module.css";
 let currentPath = Astro.url.pathname;
-
 ---
 
 <header class={styles["header"]}>
-  <ul class={styles["link-list"]}>
+  <!-- <ColorModeButton client:only="react"/> -->
+    <ul class={styles["link-list"]}>
     <a href="/" class={`${styles.link} ${currentPath === '/' ? styles.active : ''}`}><li>Home</li></a>
-    <a href="/blog" class={`${styles.link} ${currentPath.includes("/blog") ? styles.active : ''}`}><li>Blog</li></a>
+    <a href="/blogs" class={`${styles.link} ${currentPath.includes("/blog") ? styles.active : ''}`}><li>Blog</li></a>
     <a href="/events" class={`${styles.link} ${currentPath.includes('/events') ? styles.active : ''}`}><li>Events</li></a>
   </ul>
 </header>
