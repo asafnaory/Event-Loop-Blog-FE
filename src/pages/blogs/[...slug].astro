@@ -1,6 +1,8 @@
 ---
+// SSG:
 import { getCollection, type CollectionEntry } from 'astro:content';
 import Blog from '../../components/Blog/Blog.astro';
+export const prerender =  true;
 export const getStaticPaths = async () => {
   const blogs = await getCollection('blogs');
   return blogs.map((blog) => {
@@ -20,6 +22,19 @@ type Props = {
 };
 const { blog } = Astro.props;
 const { Content } = await blog.render();
+console.log('SSG!');
+
+
+// SSR: 
+// const blogs = await getCollection('blogs');
+// const blog = blogs.find((blog) => blog.slug === Astro.params.slug)!;
+
+// const { Content } = await blog.render();
+// console.log(Astro.params.slug);
+// console.log(blog.slug);
+// console.log('SSR!');
+
+
 ---
 
 <Blog

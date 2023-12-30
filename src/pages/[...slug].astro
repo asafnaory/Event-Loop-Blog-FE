@@ -1,10 +1,10 @@
 ---
-import { getCollection } from "astro:content";
-import BlogsPage from "../components/BlogsPage/BlogsPage.astro";
-import { subjectsList } from "./subjects-list";
+// SSG:
+import { getCollection } from 'astro:content';
+import BlogsPage from '../components/BlogsPage/BlogsPage.astro';
+import { subjectsList } from './subjects-list';
 export const getStaticPaths = async () => {
-    
-    return subjectsList.map((subject) => {
+  return subjectsList.map((subject) => {
     return {
       params: {
         slug: subject.link,
@@ -23,7 +23,9 @@ type Props = {
   };
 };
 const { subject } = Astro.props;
-const allBlogs = await getCollection("blogs");
-const subjectBlogs = allBlogs.filter((blog) => blog?.data?.tags.includes(subject?.name)) || [];
+const allBlogs = await getCollection('blogs');
+const subjectBlogs =
+  allBlogs.filter((blog) => blog?.data?.tags.includes(subject?.name)) || [];
 ---
+
 <BlogsPage blogs={subjectBlogs} name={subject?.name} />

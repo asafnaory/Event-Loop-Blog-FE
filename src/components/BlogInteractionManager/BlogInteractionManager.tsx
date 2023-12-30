@@ -8,13 +8,16 @@ interface BlogInteractionManagerProps {
   baseUrl: string;
   id: string;
 }
+export type Comment = {
+  comment: string;
+  commenterName: string;
+};
 
 
 export default function BlogInteractionManager({baseUrl, id}: BlogInteractionManagerProps) {
   console.log('BlogInteractionManager rendered!');
   const [likes, setLikes] = useState(0);
-  const [comments, setComments] = useState<string[]>([]);
-  const [commenterName, setCommenterName] = useState<string>();
+  const [comments, setComments] = useState<Comment[]>([]);
 
   useEffect(() => {
     const fetchBlogData = async () => {
@@ -32,7 +35,7 @@ export default function BlogInteractionManager({baseUrl, id}: BlogInteractionMan
       
     };
     fetchBlogData();
-  }, [comments, commenterName])
+  }, [])
   
   return (
     <div className={styles["like-and-comment"]}>
@@ -41,8 +44,6 @@ export default function BlogInteractionManager({baseUrl, id}: BlogInteractionMan
           id={id}
           comments={comments}
           setComments={setComments}
-          commenterName={commenterName}
-          setCommenterName={setCommenterName}
         />
     </div>
   ) 

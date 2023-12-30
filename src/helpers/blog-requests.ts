@@ -1,11 +1,12 @@
 import { baseUrl } from "../config/config";
+import { type Comment } from "../components/BlogInteractionManager/BlogInteractionManager"
 console.log('baseUrl:', baseUrl);
 
 type BlogData = {
   id: string;
   createdAt: string;
   updatedAt: string;
-  comments: string[];
+  comments: Comment[];
   likes: number;
 };
 
