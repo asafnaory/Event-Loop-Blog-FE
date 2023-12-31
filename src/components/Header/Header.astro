@@ -5,7 +5,7 @@ let currentPath = Astro.url.pathname;
 ---
 
 <header class={styles["header"]}>
-  <ColorModeButton client:only="react"/>
+  <!-- <ColorModeButton client:only="react"/> -->
     <ul class={styles["link-list"]}>
     <a href="/" class={`${styles.link} ${currentPath === '/' ? styles.active : ''}`}><li>Home</li></a>
     <a href="/blogs" class={`${styles.link} ${currentPath.includes("/blog") ? styles.active : ''}`}><li>Blog</li></a>

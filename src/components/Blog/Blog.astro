@@ -46,6 +46,6 @@ const commentable = (Astro.props as CommentableBlogProps).commentable;
     </div>
   </article>
   {
-    commentable && <BlogInteractionManager baseUrl={baseUrl} id={id} client:only="react"/>
+    commentable && <BlogInteractionManager baseUrl={baseUrl} id={id} client:visible/>
   }
 </Layout>
