@@ -27,11 +27,13 @@ const {
 
 const hrefLink =
   fullOrRlativeRedirect === "relative" ? link : `https://${link}`;
+
+  const transitionName = mainTitle.replace(/[^a-zA-Z\s]/g, "").replace(/\s/g, "-").toLowerCase();
 ---
 
   <a href={hrefLink} class={styles["card"]}>
     <Image
-      transition:name=`image-transition-${id}`
+      transition:name={transitionName}
       class={styles["card-img"]}
       src={mainImage}
       alt={mainTitle}
@@ -53,7 +55,7 @@ const hrefLink =
         }
         {secondTitle && <p class={styles["sub-title"]}>{secondTitle}</p>}
         {thirdTitle && <p class={styles["sub-title"]}>{thirdTitle}</p>}
-      <div class={styles['tag-list']}>
+        <div class={styles['tag-list']}>
         <TagList tags={tags} />
       </div>
     </div>

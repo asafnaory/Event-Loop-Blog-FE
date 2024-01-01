@@ -5,7 +5,6 @@ import styles from "./BlogInteractionManager.module.css";
 import { getBlogDataByBlogId } from "../../helpers/blog-requests";
 
 interface BlogInteractionManagerProps {
-  baseUrl: string;
   id: string;
 }
 export type Comment = {
@@ -14,8 +13,7 @@ export type Comment = {
 };
 
 
-export default function BlogInteractionManager({baseUrl, id}: BlogInteractionManagerProps) {
-  console.log('BlogInteractionManager rendered!');
+export default function BlogInteractionManager({ id }: BlogInteractionManagerProps) {
   const [likes, setLikes] = useState(0);
   const [comments, setComments] = useState<Comment[]>([]);
 

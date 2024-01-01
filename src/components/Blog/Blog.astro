@@ -1,9 +1,8 @@
 ---
-import styles from "./Blog.module.css";
-import { Image } from "astro:assets";
-import Layout from "../../layouts/ComponentsLayout/Layout.astro";
-import BlogInteractionManager from "../BlogInteractionManager/BlogInteractionManager";
-const baseUrl = import.meta.env.PUBLIC_BASE_URL;
+import styles from './Blog.module.css';
+import { Image } from 'astro:assets';
+import Layout from '../../layouts/ComponentsLayout/Layout.astro';
+import BlogInteractionManager from '../BlogInteractionManager/BlogInteractionManager';
 
 type BlogProps = {
   title: string;
@@ -17,35 +16,42 @@ interface CommentableBlogProps extends BlogProps {
   commentable: boolean;
 }
 
-type Props = CommentableBlogProps | BlogProps
+type Props = CommentableBlogProps | BlogProps;
 
-const { title, image, author, tags, date} = Astro.props;
-const id = (Astro.props as CommentableBlogProps).id; 
-const commentable = (Astro.props as CommentableBlogProps).commentable; 
+const { title, image, author, tags, date } = Astro.props;
+const id = (Astro.props as CommentableBlogProps).id;
+const commentable = (Astro.props as CommentableBlogProps).commentable;
 
-
+const transitionName = title
+  .replace(/[^a-zA-Z\s]/g, '')
+  .replace(/\s/g, '-')
+  .toLowerCase();
+console.log(transitionName);
 ---
 
 <Layout>
   <article class={styles.card}>
     <Image
-      transition:name=`image-transition-${id}`
-      transition:animate="initial"
-      class={styles["card-img"]}
+      format="avif"
+      transition:name={transitionName}
+      class={styles['card-img']}
       src={image}
       alt={title}
+      width={600}
+      height={450}
     />
-    <h2 class={styles["card-title"]}>{title}</h2>
-    <p class={styles["card-author"]}>By {author}</p>
-    <p class={styles["card-author"]}>{date}</p>
-    <ul class={styles["card-tags"]}>
+    <h2 class={styles['card-title']}>{title}</h2>
+    <p class={styles['card-author']}>By {author}</p>
+    <p class={styles['card-author']}>{date}</p>
+    <ul class={styles['card-tags']}>
       {tags.map((tag) => <li class={styles.tag}>#{tag}</li>)}
     </ul>
-    <div class={styles["card-body"]}>
+    <div class={styles['card-body']}>
       <slot />
     </div>
   </article>
   {
-    commentable && <BlogInteractionManager baseUrl={baseUrl} id={id} client:visible/>
+    // commentable && <BlogInteractionManager  id={id} client:only="react"/>
+    commentable && <BlogInteractionManager id={id} client:visible />
   }
 </Layout>

@@ -11,8 +11,8 @@
 
 .card-img {
         border-radius: 12px;
-        height: auto;
-        width: 500px;
+        /* height: auto; */
+        /* width: 500px; */
 }
 
 .card-title {

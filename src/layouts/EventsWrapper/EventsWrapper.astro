@@ -1,38 +1,48 @@
 ---
-import Blog from "../../components/Blog/Blog.astro";
-import Card from "../../components/Card/Card.astro";
-import styles from "./EventsWrapper.module.css";
-import { getCollection } from "astro:content";
-import ME from '../../../public/me.png'
-const events = await getCollection('events') || [];
+import { Image } from 'astro:assets';
+import Card from '../../components/Card/Card.astro';
+import styles from './EventsWrapper.module.css';
+import { getCollection } from 'astro:content';
+import ME from '../../../public/me.png';
+import Layout from '../ComponentsLayout/Layout.astro';
+const events = (await getCollection('events')) || [];
 const { frontmatter } = Astro.props;
-
 ---
 
-<Blog
-  title={frontmatter.title}
-  image={ME}
-  author={frontmatter.author}
-  tags={[]}>
-  <slot />
-  <div class={styles["events-wrapper"]}>
-    {events.length > 0 ? 
-      events.map((event) => 
-        event && <Card
-          fullOrRlativeRedirect="full"
-          tags={event.data.tags}
-          link={event.data.link}
-          mainTitle={event.data.about}
-          secondTitle={`${event.data.date} - ${event.data.time}`}
-          thirdTitle={event.data.where}
-          mainImage={ME} 
-        /> 
-      )
-        : <div class={styles["events-message"]}>
-              <p>
-                There are no events planned soon
-              </p> 
-            </div>
-    }
+<Layout>
+  <div class={styles['events-wrapper']}>
+    <Image
+      format="avif"
+      class={styles['image']}
+      src={ME}
+      alt={frontmatter.title}
+      width={600}
+      height={550}
+    />
+    <div class={styles['text']}>
+      <slot />
+    </div>
+      {
+        events.length > 0 ? (
+          events.map(
+            (event) =>
+              event && (
+                <Card
+                  fullOrRlativeRedirect="full"
+                  tags={event.data.tags}
+                  link={event.data.link}
+                  mainTitle={event.data.about}
+                  secondTitle={`${event.data.date} - ${event.data.time}`}
+                  thirdTitle={event.data.where}
+                  mainImage={ME}
+                />
+              ),
+          )
+        ) : (
+          <div class={styles['events-message']}>
+            <p>There are no events planned soon</p>
+          </div>
+        )
+      }
   </div>
-</Blog>
+</Layout>

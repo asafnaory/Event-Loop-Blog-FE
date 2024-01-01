@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './LikeManager.module.css';
 import { useLocalStorage } from '../react-hooks/useLocalStorage';
 import confetti from 'canvas-confetti';
@@ -26,7 +26,6 @@ export default function LikeManager({likes,setLikes, id }: LikeManagerProps): JS
         if('error' in response){
           setLikes(likes);
           setIsLiked(false);
-          return;
         }
       };
 
