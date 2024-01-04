@@ -6,27 +6,6 @@ import Footer from '../../components/Footer/Footer.astro';
 import styles from './Layout.module.css';
 import { ViewTransitions } from 'astro:transitions';
 
-const anim = {
-  old: {
-    name: 'fadeIn',
-    duration: '4s',
-    easing: 'linear',
-    fillMode: 'forwards',
-  },
-  new: {
-    name: 'fadeOut',
-    duration: '4s',
-    easing: 'linear',
-    fillMode: 'backwards',
-  }
-};
-
-const myFade = {
-  forwards: anim,
-  backwards: anim,
-};
-
-
 ---
 
 <html>

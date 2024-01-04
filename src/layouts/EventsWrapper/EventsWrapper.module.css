@@ -20,24 +20,22 @@
         width: 50%;
 
 }
-@media (max-width: 1000px) {
+
+.events-message {
+    text-align: center;
+        color: var(--color-text-on-primary);
+        font-size: 1.2em;
+        border-radius: 5px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    
+@media (max-width: 980px) {
     .events-wrapper {
         gap: 20px;
     }
 }
-
-.events-message {
-        text-align: center;
-        color: var(--color-text-on-primary);
-        font-size: 1.2em;
-        padding: 20px;
-        background-color: var(--comment-like-background-color);
-        border-radius: 5px;
-        margin-top: 20px;
-        margin-bottom: 20px;
-}
-
-@media (max-width: 1000px) {
+@media (max-width: 980px) {
     .events-message {
         font-size: 2.5em;
         padding: 10px;

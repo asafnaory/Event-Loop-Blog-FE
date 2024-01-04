@@ -11,8 +11,6 @@
 
 .card-img {
         border-radius: 12px;
-        /* height: auto; */
-        /* width: 500px; */
 }
 
 .card-title {
@@ -56,7 +54,7 @@
         color: var(--color-text-on-primary);
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 980px) {
     .card-title {
         font-size: 1.2em;
         text-align: center;
@@ -70,10 +68,10 @@
         padding: 4px 8px;
     }
     .card-author {
-        font-size: 0.8em;
+        font-size: 0.5em;
     }
     .card-img {
-        width: 100%;
+        width: 80%;
     }
     .card {
         padding: 10px;

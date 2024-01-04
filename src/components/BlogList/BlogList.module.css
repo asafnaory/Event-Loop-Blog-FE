@@ -14,3 +14,12 @@
     justify-items: center;
     align-items: center;
 }
+
+
+@media (max-width: 980px) {
+    .blog-list {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 80px;
+    }
+}

@@ -22,27 +22,28 @@ const { frontmatter } = Astro.props;
     <div class={styles['text']}>
       <slot />
     </div>
+    <div class={styles['events-message']}>
       {
         events.length > 0 ? (
           events.map(
             (event) =>
               event && (
                 <Card
+                  id={event.data.id}
                   fullOrRlativeRedirect="full"
                   tags={event.data.tags}
                   link={event.data.link}
                   mainTitle={event.data.about}
                   secondTitle={`${event.data.date} - ${event.data.time}`}
                   thirdTitle={event.data.where}
-                  mainImage={ME}
+                  mainImage={event.data.image}
                 />
               ),
           )
         ) : (
-          <div class={styles['events-message']}>
-            <p>There are no events planned soon</p>
-          </div>
+          <p>There are no events planned soon</p>
         )
       }
+    </div>
   </div>
 </Layout>

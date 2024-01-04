@@ -15,16 +15,16 @@ const blogsCollection = defineCollection({
 });
 
 const eventsCollection = defineCollection({
-  type: 'content', 
+  type: 'data', 
   schema:({ image }) => z.object({
     id: z.string(),
     tags: z.array(z.string()),
-    link: z.string(),
+    link: z.string().optional(),
     about: z.string(),
     date: z.string(),
     time: z.string(),
     where: z.string(),
-    image: image().optional().refine((img) => img),
+    image: image().refine((img) => img),
   }),
 });
 

@@ -89,7 +89,7 @@
     font-family: var(--header-font-family);
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 980px) {
     .comment {
         font-size: 2.6em;
     }
