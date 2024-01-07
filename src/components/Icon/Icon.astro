@@ -12,5 +12,5 @@ const { link, image, alt } = Astro.props;
 ---
 
 <div class={`${styles.icon} `}>
-  <a href={link}> <Image class={styles.image} src={image} alt={alt} /></a>
+  <a href={link}> <Image format="avif" class={styles.image} src={image} alt={alt} width={120} height={120} /></a>
 </div>
