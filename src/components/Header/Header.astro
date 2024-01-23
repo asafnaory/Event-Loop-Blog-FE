@@ -1,38 +1,64 @@
 ---
-import { ColorModeButton } from '../ColorModeButton/ColorModeButton';
 import styles from './Header.module.css';
 let currentPath = Astro.url.pathname;
+import ThemeIcon from '../ThemeIcon/ThemeIcon.astro';
+import ThemeToggle from '../ThemeIcon/ThemeToggle.tsx';
 ---
 
 <header class={styles['header']}>
   <input type="checkbox" id="menu-toggle" class={styles.menuToggle} />
   <label for="menu-toggle" class={styles.hamburger}>&#9776;</label>
+  <ThemeIcon />
+  <!-- <ThemeToggle client:visible/> -->
   <nav class={styles.menu}>
     <label for="menu-toggle" class={styles.menuClose}>&#10005;</label>
-    <ul class={`${styles['link-list']}`}>
-      <li>
-        <a
-        href="/"
-        class={`${styles.link} ${currentPath === '/' ? styles.active : ''}`}
-        >Home</a
-        >
-      </li>
-      <li>
-      <a
-        href="/blogs"
-        class={`${styles.link} ${
-          currentPath.includes('/blog') ? styles.active : ''
-        }`}>Blog</a
-      >
-      </li>
-      <li>
-      <a
-        href="/events"
-        class={`${styles.link} ${
-          currentPath.includes('/events') ? styles.active : ''
-        }`}>Events</a
-      >
-      </li>
-    </ul>
+    <div class={styles['link-list']}>
+      <ul class={`${styles['link-list-header']}`}>
+        <li>
+          <a
+            href="/"
+            class={`${styles.link} ${currentPath === '/' ? styles.active : ''}`}
+            >Home</a
+          >
+        </li>
+        <li>
+          <a
+            href="/blogs"
+            class={`${styles.link} ${
+              currentPath.includes('/blog') ? styles.active : ''
+            }`}>Blog</a
+          >
+        </li>
+        <li>
+          <a
+            href="/events"
+            class={`${styles.link} ${
+              currentPath.includes('/events') ? styles.active : ''
+            }`}>Events</a
+          >
+        </li>
+      </ul>
+      <ul class={`${styles['link-list-footer']}`}>
+        <il>
+          <a
+            class={styles.link}
+            href="https://www.linkedin.com/in/asaf-naory/"
+            target="_blank"
+            rel="noopener noreferrer">LinkedIn</a
+          >
+        </il>
+        <il>
+          <a class={styles.link} href="mailto:asafnaory@gmail.com">Email</a>
+        </il>
+        <il>
+          <a
+            class={styles.link}
+            href="https://github.com/asafnaory"
+            target="_blank"
+            rel="noopener noreferrer">GitHub</a
+          >
+        </il>
+      </ul>
+    </div>
   </nav>
 </header>

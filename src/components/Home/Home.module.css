@@ -82,19 +82,19 @@
   }
   
 
-  @media (max-width: 980px) {
+  @media (max-width: 430px) {
     .title {
-      font-size: 4em;
+      font-size: 2em; /* Adjust font size to fit smaller screen */
     }
     .icon-wrapper {
       flex-wrap: wrap;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       justify-items: center;
-      width: 800px;
+      width: 100%; /* Use percentage to make it responsive */
     }
     .my-image {
-      width: 450px;
-      height: 350px;
+      width: 85%; /* Use percentage to make it responsive */
+      height: auto; /* Maintain aspect ratio */
     }
   }

@@ -1,0 +1,20 @@
+#themeToggle {
+    border: 0;
+    background: none;
+  }
+  
+  .sun {
+    fill: black;
+  }
+  
+  .moon {
+    fill: transparent;
+  }
+  
+  [data-theme='dark'] .sun {
+    fill: transparent;
+  }
+  
+  [data-theme='dark'] .moon {
+    fill: white;
+  }

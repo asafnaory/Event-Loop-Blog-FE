@@ -51,7 +51,7 @@ console.log(transitionName);
     </div>
   </article>
   {
-    // commentable && <BlogInteractionManager  id={id} client:only="react"/>
-    commentable && <BlogInteractionManager id={id} client:visible />
+   commentable && <BlogInteractionManager id={id} client:load />
+
   }
 </Layout>

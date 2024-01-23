@@ -1,0 +1,161 @@
+---
+id: '5c40277e-c7fb-4c41-932e-3189ab59f141'
+author: Asaf Naory
+title: "Understanding Covariance and Contravariance in Typescript"
+tags: ['typescript']
+date: January 14 2024
+image: '../assets/Covariance-typescript-2.png'
+authorImage: '../assets/AsafNaory2.png'
+---
+import CenteredDiv from '../../components/CenterDiv/CenterDiv';
+
+A few days ago I got a task. 
+I needed to create a list of hanlders that will run one after the other in a row and will munipulte a json returned from an other microservice in order to return it properly to the client. 
+Each hander sould receive the output of the handler the came before it, and return its value to the handler after it.
+As a part of this task I wanted to crete a function that will run this list of handlers and will return the final result.
+this function needed to get a list of handler `Hander[]` and return the last ones result.
+I wanted to create a type for this funtion. the type should look as the following:
+
+```typescript
+    function runHandlers(handlers: Handler[]): HandlerResult {
+        //...
+    }
+```
+
+Cool, I thought, I will just create a type for the Handler and I'm all set.
+Handler can be a function with any input and any output.
+however I can't use the type `any` because we don't use `any` in our code base and I don't want to break this rules.
+No worries, I know another top level type - `unknown`, I will use it.
+
+# unknown to the rescue
+I wrote the following type:
+
+```typescript
+    type Handler = (...input: unknown[]) => unknown;
+```
+all set right? wrong!
+
+after I was done I tried to use this `Handler` type on my functions, for example:
+
+```typescript
+    type Handler = (...input: unknown[]) => unknown;
+    function foo: Handler = (p: number) => {
+        p.toFixed();
+    }
+
+    //or
+
+    function foo: Handler = (p: string) => {
+        p.charAt();
+    }
+
+```
+
+and I got the following error:
+
+```typescript
+    Type 'unknown' is not assignable to type 'number'.
+   //or 
+    Type 'unknown' is not assignable to type 'string'.
+```
+<CenteredDiv>
+![Alt text for your image](/Jackie-Chan-WTF.jpeg)
+</CenteredDiv>
+
+Wait what? Type `unknown` is not assignable to type `number`? 
+1. I did the opposite - I was trying to assign a function with a parmeter of type `number` to my general type function  with a parmeter of type `unknown`.
+2. I thought that `unknown` is the new `any` and I can use it as a top level type.
+3. I thought all top level types are simmiar and when I changed the type to `any` it did work.
+
+```typescript
+    type Handler = (...input: any[]) => unknown;
+    // works
+```
+
+I thought I know everything about typescript, but I was wrong. So started to look for the answer until I found it.
+
+# Covariance and Contravariance
+
+before the explanation of Covariance and Contravariance, during this part of the article I will use the following type:
+
+```typescript
+    type IsSubtype<S, P> = S extends P ? true : false;
+```
+This type will help us to check if `S` is a subtype of `P`. if it is it will return `true` otherwise it will return `false`.
+
+Lets go back. Some of the typescript types are covariant. It means that if type `A` is a subtype of type `B` then `T<A>` is a subtype of `T<B>`.
+For example the Promise type is covariant. if `A` is a subtype of `B` then `Promise<A>` is a subtype of `Promise<B>`.
+
+```typescript
+    type T = IsSubtypeOf<Promise<A>, Promise<B>> 
+    // true
+```
+
+Some of the typescript types are contravariant. It means that if type `A` is a subtype of type `B` then `T<B>` is a subtype of `T<A>`.
+for example functions are contravariant. if `A` is a subtype of `B` then `(param: B) => void` is a subtype of `(param: A) => void`.
+
+```typescript
+    type IsSubtype<S, P> = S extends P ? true : false;
+    type T = IsSubtypeOf<(param: B) => void, (param: A) => void>
+    // true
+```
+Now with this knowledge, think about my case again. I had a type `Handler` and I tried to set my `foo` fucntion to be of type `Handler`.
+That means that that my `foo` function is a subtype of the `Handler` type.
+But we said that functions are contravariant, so if `foo` is a subtype of `Handler`, then `F<Handler>` is a subtype of `F<typeof foo>` (F for Function).
+From that the error. Typescript tries to set the `Handler` into `typeof foo` since it is its subtype and `unknown` can not be set to `number` or `string`.
+That how we got to this error: Type `unknown` is not assignable to type `number` 
+
+# But why?
+
+If you think about that it does make sense.
+
+Think about the next example: 
+
+```typescript
+    type unknownFoo = (...p: unknown[]) => void
+    function numberFoo: unknownFoo(p: number): void {
+        p.toFixed();
+    }
+    numberFoo('hello', 1, true);
+```
+That will pass compilation, `'hello', 1, true` are of type `unknown[]` but will fail at runtime because `p` is not a number it is `[string, number, boolean]`.  
+But if typescript will rais an error it will protect us from this runtime error. Well how will it know? 
+It can reverse the order of the types and check if its valid.
+Clever right?
+
+Just so you know this is valid code and working as expected:
+
+```typescript
+    type neverFoo = (...p: never) => void
+    function numberFoo: neverFoo(p: number): void {
+        p.toFixed();
+    }
+```
+
+Why? because now you can not do this:
+
+```typescript
+    numberFoo('hello', 1, true);
+```
+Acctually you can not pass anything to `numberFoo` because `never` is a type that can not be set to anything. You can not call it at all,
+but typescipt can be sure that you not get a runtime error.
+
+
+# so what is the solution?
+## The satisfies Operator
+Typescript has a special operator (typescript 4.9) that can help us with this problem. The operator is `satisfies`.
+`satisfies` help us to ensure that some expression matches some type, 
+but also want to keep the most specific type of that expression for inference purposes.
+
+Lets see how it solves our issue: 
+
+```typescript
+    type neverFoo = (...p: never) => void
+    function numberFoo(p: number): void {
+        p.toFixed();
+    } satisfies neverFoo
+
+    numberFoo(1)
+    // works
+```
+now I can use `neverFoo` as a type for `numberFoo` and it **will** work.

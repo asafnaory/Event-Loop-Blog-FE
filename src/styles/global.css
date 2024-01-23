@@ -1,22 +1,4 @@
 :root {
-    --main-bg-color: #0d0f18;
-    --main-lighter-bg-color: #131624;
-    --main-lighter-border-color: #131624f5;
-    --main-bg-color-hover: #0d1521f9;
-    --main-bg-color-image: #1f2630;
-    --color-primary: #020204;
-    --color-primary-hover:#007bff;
-    --color-text-on-primary: #FFF;
-    --editor-bg-color: #fefcfc;
-    --editor-text-color: #000;
-    --inactive-link-color: rgba(255, 255, 255, 0.657);
-    --active-link-color: #FFF;
-    --comment-like-background-color: #404663;
-    --header-font-family: 'Open Sans', sans-serif;
-    --text-font-family: 'Open Sans', sans-serif;
-}
-[data-theme="dark"] {
-  /* Dark theme */
   --main-bg-color: #0d0f18;
   --main-lighter-bg-color: #131624;
   --main-lighter-border-color: #131624f5;
@@ -30,14 +12,24 @@
   --inactive-link-color: rgba(255, 255, 255, 0.657);
   --active-link-color: #FFF;
   --comment-like-background-color: #404663;
-
+  --header-font-family: 'Open Sans', sans-serif;
+  --text-font-family: 'Open Sans', sans-serif;
 }
 
-
 [data-theme="light"] {
-  --text-color: var(--black);
-  --button-color: var(--cobalt);
-  --bg-color: var(--white);
-  --footer-bg-color: var(--ui-gray-consent);
-  --note-color: var(--ui-dark-gray);
+  --main-bg-color: #f2f2f2;
+  --main-lighter-bg-color: #e6e6e6;
+  --main-lighter-border-color: #cccccc;
+  --main-bg-color-hover: #e0e0e0;
+  --main-bg-color-image: #d4d4d4;
+  --color-primary: #fdfdfd;
+  --color-primary-hover: #007bff;
+  --color-text-on-primary: #000;
+  --editor-bg-color: #010101;
+  --editor-text-color: #fff;
+  --inactive-link-color: rgba(0, 0, 0, 0.657);
+  --active-link-color: #000;
+  --comment-like-background-color: #bfbfbf;
+  --header-font-family: 'Open Sans', sans-serif;
+  --text-font-family: 'Open Sans', sans-serif;
 }

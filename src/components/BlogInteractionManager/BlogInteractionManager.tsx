@@ -3,6 +3,7 @@ import LikeManager from "../LikeManager/LikeManager";
 import CommentManager from "../CommentManager/CommentManager";
 import styles from "./BlogInteractionManager.module.css";
 import { getBlogDataByBlogId } from "../../helpers/blog-requests";
+// import { block } from 'million/react';
 
 interface BlogInteractionManagerProps {
   id: string;
@@ -13,7 +14,7 @@ export type Comment = {
 };
 
 
-export default function BlogInteractionManager({ id }: BlogInteractionManagerProps) {
+const  BlogInteractionManager = ({ id }: BlogInteractionManagerProps) => {
   const [likes, setLikes] = useState(0);
   const [comments, setComments] = useState<Comment[]>([]);
 
@@ -46,3 +47,7 @@ export default function BlogInteractionManager({ id }: BlogInteractionManagerPro
     </div>
   ) 
 }
+
+// const BlogInteractionManagerBlock = block(BlogInteractionManager);
+// export default BlogInteractionManagerBlock;
+export default BlogInteractionManager;

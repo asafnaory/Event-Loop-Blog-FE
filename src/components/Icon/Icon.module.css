@@ -11,3 +11,11 @@
 .image {
     margin: 10px;
   }
+
+  @media (max-width: 430px) {
+    .image {
+      margin: 10px;
+      width: 80px;
+      height: 80px;
+    }
+  }
