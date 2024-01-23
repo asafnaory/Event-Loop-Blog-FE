@@ -16,5 +16,5 @@ console.log(`Port: ${port}`, PORT);
 export default defineConfig({
   integrations: [react(), mdx() /*, qwikdev()*/],
   adapter: vercel(),
-  output: "server"
+  output: "hybrid"
 });
