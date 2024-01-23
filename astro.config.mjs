@@ -4,6 +4,7 @@ import mdx from "@astrojs/mdx";
 import { loadEnv } from "vite";
 import node from "@astrojs/node";
 // import qwikdev from "@qwikdev/astro";
+import vercel from "@astrojs/vercel/serverless";
 const {
   PORT
 } = loadEnv(process.env.NODE_ENV, process.cwd(), "");
@@ -13,9 +14,7 @@ console.log(`Port: ${port}`, PORT);
 
 // https://astro.build/config
 export default defineConfig({
-  // output: "server",
-  integrations: [react(), mdx()/*, qwikdev()*/],
-  adapter: node({
-    mode: "standalone"
-  })
+  integrations: [react(), mdx() /*, qwikdev()*/],
+  adapter: vercel(),
+  output: "server"
 });
