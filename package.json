@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
-    "preview": "prisma generate && astro preview",
+    "build": "prisma generate && astro build",
+    "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
