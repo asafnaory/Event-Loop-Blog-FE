@@ -2,8 +2,6 @@ import { useEffect, useState } from "react"
 import LikeManager from "../LikeManager/LikeManager";
 import CommentManager from "../CommentManager/CommentManager";
 import styles from "./BlogInteractionManager.module.css";
-import { getBlogDataByBlogId } from "../../helpers/blog-requests";
-import { blogService } from "../../lib/blog.service";
 import type { BlogWithComments } from "../../lib/types";
 // import { block } from 'million/react';
 

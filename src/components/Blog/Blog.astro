@@ -54,7 +54,6 @@ const blogData = await blogService.getBlogDataById(id)
     </div>
   </article>
   {
-   commentable && <BlogInteractionManager id={id} blogData={blogData} client:load />
-
+   commentable && <BlogInteractionManager id={id} blogData={blogData} client:only="react"  />
   }
 </Layout>
