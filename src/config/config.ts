@@ -5,4 +5,4 @@ console.log(import.meta.env.SITE);
 console.log(import.meta.env.ASSETS_PREFIX);
 console.log(import.meta.env.PUBLIC_BASE_URL);
 
-export const baseUrl = 'http://localhost:4321';
+export const baseUrl = import.meta.env.PUBLIC_BASE_URl || 'http://localhost:4321';
