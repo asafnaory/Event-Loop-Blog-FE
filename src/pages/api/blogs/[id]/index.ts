@@ -21,3 +21,10 @@ export const PATCH: APIRoute = async ({ params, request }) => {
     { status: 404 }
   )
 }
+export const ALL: APIRoute = ({ request }) => {
+  return new Response(
+    JSON.stringify({
+      message: `This was a ${request.method}!`,
+    }),
+  );
+};

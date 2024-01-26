@@ -15,6 +15,6 @@ console.log(`Port: ${port}`, PORT);
 // https://astro.build/config
 export default defineConfig({
   integrations: [react(), mdx() /*, qwikdev()*/],
+  output: "server",
   adapter: vercel(),
-  output: "server"
 });
