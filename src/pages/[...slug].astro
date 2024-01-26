@@ -3,6 +3,7 @@
 import { getCollection } from 'astro:content';
 import BlogsPage from '../components/BlogsPage/BlogsPage.astro';
 import { subjectsList } from './subjects-list';
+export const prerender = true;
 export const getStaticPaths = async () => {
   return subjectsList.map((subject) => {
     return {

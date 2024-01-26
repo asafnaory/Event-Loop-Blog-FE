@@ -3,6 +3,7 @@ import styles from './Blog.module.css';
 import { Image } from 'astro:assets';
 import Layout from '../../layouts/ComponentsLayout/Layout.astro';
 import BlogInteractionManager from '../BlogInteractionManager/BlogInteractionManager';
+import { blogService } from '../../lib/blog.service';
 
 type BlogProps = {
   title: string;
@@ -27,6 +28,8 @@ const transitionName = title
   .replace(/\s/g, '-')
   .toLowerCase();
 console.log(transitionName);
+
+const blogData = await blogService.getBlogDataById(id)   
 ---
 
 <Layout>
@@ -51,7 +54,7 @@ console.log(transitionName);
     </div>
   </article>
   {
-   commentable && <BlogInteractionManager id={id} client:load />
+   commentable && <BlogInteractionManager id={id} blogData={blogData} client:load />
 
   }
 </Layout>

@@ -5,4 +5,4 @@ console.log(import.meta.env.SITE);
 console.log(import.meta.env.ASSETS_PREFIX);
 console.log(import.meta.env.PUBLIC_BASE_URL);
 
-export const baseUrl = isProd? 'https://event-loop-blog-be-production.up.railway.app' : 'http://localhost:3000';
+export const baseUrl = 'http://localhost:4321';

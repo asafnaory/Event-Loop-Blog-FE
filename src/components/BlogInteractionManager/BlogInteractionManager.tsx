@@ -3,9 +3,12 @@ import LikeManager from "../LikeManager/LikeManager";
 import CommentManager from "../CommentManager/CommentManager";
 import styles from "./BlogInteractionManager.module.css";
 import { getBlogDataByBlogId } from "../../helpers/blog-requests";
+import { blogService } from "../../lib/blog.service";
+import type { BlogWithComments } from "../../lib/types";
 // import { block } from 'million/react';
 
 interface BlogInteractionManagerProps {
+  blogData: Partial<BlogWithComments> | null;
   id: string;
 }
 export type Comment = {
@@ -14,27 +17,12 @@ export type Comment = {
 };
 
 
-const  BlogInteractionManager = ({ id }: BlogInteractionManagerProps) => {
-  const [likes, setLikes] = useState(0);
-  const [comments, setComments] = useState<Comment[]>([]);
+const  BlogInteractionManager = ({ id, blogData }: BlogInteractionManagerProps) => {
+  console.log('blogData', blogData);
+  
+  const [likes, setLikes] = useState(blogData?.likes || 0);
+  const [comments, setComments] = useState<Comment[]>(blogData?.comments || []);
 
-  useEffect(() => {
-    const fetchBlogData = async () => {
-      const response = await getBlogDataByBlogId(id)    
-      if('error' in response){
-        return;
-      }
-      if(response.success.data.likes){
-        setLikes(response.success.data.likes);
-      }
-      if(response.success.data.comments){
-        setComments(response.success.data.comments);
-      }
-      console.log('BlogInteractionManager fetched blog data!', response.success.data.comments, response.success.data.likes);
-      
-    };
-    fetchBlogData();
-  }, [])
   
   return (
     <div className={styles["like-and-comment"]}>

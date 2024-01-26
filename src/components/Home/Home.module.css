@@ -87,12 +87,13 @@
       font-size: 2em; /* Adjust font size to fit smaller screen */
     }
     .icon-wrapper {
+
       overflow: auto;
       flex-wrap: wrap;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       justify-items: center;
-      width: 100%; /* Use percentage to make it responsive */
+      /* width: 100%; Use percentage to make it responsive */
     }
     .my-image {
       width: 85%; /* Use percentage to make it responsive */

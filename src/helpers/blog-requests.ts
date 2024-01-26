@@ -14,7 +14,7 @@ type DataOrError = { success: {data: BlogData} } | { error: Error, }
 type SuccessOrError = { success: {status: number} } | { error: Error, }
 
 function setEndpoint(id: string) {
-  const res = `${baseUrl}/blogs/${id}`;
+  const res = `${baseUrl}/api/blogs/${id}`;
   console.log('url: ',res); 
   return res;
 }
@@ -27,7 +27,7 @@ export async function addComment(body: unknown, id: string): Promise<SuccessOrEr
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      comments: body,
+      comment: body,
     }),
   });
 
@@ -44,7 +44,7 @@ export async function addComment(body: unknown, id: string): Promise<SuccessOrEr
 }
 export async function addLike(body: unknown, id: string): Promise<SuccessOrError>{
   let returnValue = {}
-  const response = await fetch(`${baseUrl}/blogs/${id}`, {
+  const response = await fetch(`${baseUrl}/api/blogs/${id}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
