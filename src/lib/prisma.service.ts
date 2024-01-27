@@ -19,11 +19,13 @@ export class PrismaService implements DBClient{
   }
 
   async getBlogDataById(id: string): Promise<BlogWithComments | null>{
+    console.log('getBlogDataById', id);
     try {
       const blogData = await this.prisma.blog.findUnique({
         where: { id },
         include: { comments: true },
       });
+      console.log('blogData', blogData);
       if (!blogData) return null;
       return blogData;
     } catch (err: unknown) {
