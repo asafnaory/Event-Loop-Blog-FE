@@ -71,7 +71,8 @@
         font-size: 0.5em;
     }
     .card-img {
-        width: 80%;
+        width: 50%;
+        height: 50%;
     }
     .card {
         padding: 10px;

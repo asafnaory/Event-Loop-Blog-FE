@@ -5,6 +5,7 @@ import BlogsPage from '../components/BlogsPage/BlogsPage.astro';
 import { subjectsList } from './subjects-list';
 export const prerender = true;
 export const getStaticPaths = async () => {
+  console.log('getStaticPaths - SSG');
   return subjectsList.map((subject) => {
     return {
       params: {

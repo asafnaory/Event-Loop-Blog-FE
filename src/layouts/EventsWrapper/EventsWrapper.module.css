@@ -29,13 +29,22 @@
         margin-top: 20px;
         margin-bottom: 20px;
     }
-    
+
 @media (max-width: 980px) {
+    .image {
+        height: 80%;
+        width: 80%;     
+    }
+    .text {
+        width: 80%; /* Adjust as needed */
+        margin: 0 auto; /* Center the container */
+        text-align: center;
+        font-size: 1.2em;
+    }
+
     .events-wrapper {
         gap: 20px;
     }
-}
-@media (max-width: 980px) {
     .events-message {
         font-size: 2.5em;
         padding: 10px;

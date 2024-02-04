@@ -90,16 +90,24 @@
 }
 
 @media (max-width: 980px) {
-    .comment {
-        font-size: 2.6em;
+    .comment-wrapper {
+        width: 90%;
+        padding: 10px;
     }
-    .comment-textarea {
-        font-size: 2.5em;
-        height: 100px;
+    .comment-input-area{
+        display: flex;
+        /* gap: 50px; */
+        justify-content: space-between;
     }
-    .comment-button {
-        height: 100px;
-        margin-bottom: 8px;
-        font-size: 1.3em;
+
+    .comments-display {
+        width: 100%;
+    }
+    .comment-button{
+        margin-right: 0px;
+    }
+
+    .name-input, .comment-textarea {
+        width: 80%;
     }
 }

@@ -82,21 +82,26 @@
   }
   
 
-  @media (max-width: 430px) {
+  @media (max-width: 980px) {
+    .about-me{
+      width: 90%; 
+      /* margin: 0 auto; */
+
+    }
     .title {
       font-size: 2em; /* Adjust font size to fit smaller screen */
     }
     .icon-wrapper {
-
       overflow: auto;
       flex-wrap: wrap;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       justify-items: center;
-      /* width: 100%; Use percentage to make it responsive */
+      gap: 0px;
     }
     .my-image {
       width: 85%; /* Use percentage to make it responsive */
       height: auto; /* Maintain aspect ratio */
     }
   }
+

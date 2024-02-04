@@ -1,0 +1,14 @@
+---
+    const waitFiveSeconds = new Promise((resolve) => {
+        setTimeout(() => {
+            resolve('I am test one! I waited 5 seconds to show up!');
+        }, 5000);
+    });
+    const content = await waitFiveSeconds;
+
+---
+
+
+<div slot="test-one" style="color: white;">
+    <h1>{content}</h1>
+</div>
