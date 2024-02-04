@@ -72,7 +72,7 @@
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    height: 100%;
+    /* height: 100%; */
   }
 
   .image {
@@ -92,7 +92,7 @@
       font-size: 2em; /* Adjust font size to fit smaller screen */
     }
     .icon-wrapper {
-      overflow: auto;
+      /* overflow: auto; */
       flex-wrap: wrap;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
