@@ -62,7 +62,11 @@
 
 
 
-@media (max-width: 430px) {
+@media (max-width: 980px) {
+  body {
+    margin: 0;
+    padding: 0;
+  }
   .header {
     display: flex;
     justify-content: start;
@@ -124,7 +128,7 @@
     flex-direction: column;
     /* justify-content: space-evenly; */
     gap: 10px;
-    margin-bottom: 225px;
+    margin-bottom: 200px;
   }
   .link-list-footer a {
     text-decoration: none;
