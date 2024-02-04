@@ -12,6 +12,7 @@ const { name } = Astro.props
     <p>{`but don't worry, I'm working on it...`}</p>
   <div class="centered-content">
     <Image
+    class="image"
     src={EmptyFolder}
     alt="Empty Folder"
     height={400}
@@ -47,6 +48,16 @@ const { name } = Astro.props
   .centered-content {
     flex-direction: column;
     padding: 10px;
+  }
+  .centered-content{
+    margin-top: 50px;
+  }
+  .image{
+    height: 300px;
+    width: 300px;
+  }
+  .text{
+    font-size: 1.2rem;
   }
 }
 
