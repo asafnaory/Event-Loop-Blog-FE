@@ -10,5 +10,5 @@
 -- AlterTable
 ALTER TABLE "Comment" DROP COLUMN "comment",
 DROP COLUMN "commenterName",
-ADD COLUMN     "content" TEXT NOT NULL,
-ADD COLUMN     "userName" TEXT NOT NULL;
+ADD COLUMN     "content" TEXT,
+ADD COLUMN     "userName" TEXT;
