@@ -1,5 +1,5 @@
 import { PrismaService } from './prisma.service';
-import type { BlogDataDto, CreateCommentDto, DBClient } from './types';
+import type { BlogDataDto, DBClient } from './types';
 
 
 export class BlogService {

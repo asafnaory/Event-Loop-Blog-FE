@@ -1,14 +1,13 @@
 ---
-    const waitFiveSeconds = new Promise((resolve) => {
-        setTimeout(() => {
-            resolve('I am test one! I waited 5 seconds to show up!');
-        }, 5000);
-    });
-    const content = await waitFiveSeconds;
+const delay = (ms: any) => new Promise((resolve) => setTimeout(resolve, ms));
+const factPromise = fetch('https://catfact.ninja/fact')
+  .then((response) => response.json())
+  .then((res) => delay(2000).then(() => res))
+  .then((factData) => factData.fact);
 
 ---
 
 
 <div slot="test-one" style="color: white;">
-    <h1>{content}</h1>
+    <p>{factPromise}</p>
 </div>

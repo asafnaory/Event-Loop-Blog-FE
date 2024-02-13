@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styles from './CommentManager.module.css';
-import { addComment } from '../../helpers/blog-requests';
 import type { Comment } from '../BlogInteractionManager/BlogInteractionManager';
+import { trpc } from '../../client';
 
 type CommentManagerProps = {
     comments: Comment[];
@@ -10,27 +10,27 @@ type CommentManagerProps = {
 }
 
 export default function CommentManager({ setComments, comments, id }: CommentManagerProps): JSX.Element {
-    const [currentComment, setCurrentComment] = useState('');
-    const [currentCommenterName, setCurrentCommenterName] = useState('');
+    const [currentContent, setCurrentContent] = useState('');
+    const [currentUserName, setCurrentUserName] = useState('');
     const [error, setError] = useState<string | boolean>(false);
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
-        if(!currentComment.trim()){
+        if(!currentContent.trim()){
           setError('You forgot to add the comment text.');
           return;
         }
-        if(!currentCommenterName|| !currentCommenterName.trim()){
+        if(!currentUserName|| !currentUserName.trim()){
           setError('You forgot to add your name.');
           return;
         }
         
 
-        setComments((prevComments: Comment[]) => [...prevComments, {comment: currentComment, commenterName: currentCommenterName}]);
-        setCurrentComment('');
-        setCurrentCommenterName('');
-        const response = await addComment({comment: currentComment, commenterName: currentCommenterName}, id);
-        if('error' in response){
+        setComments((prevComments: Comment[]) => [...prevComments, {content: currentContent, userName: currentUserName}]);
+        setCurrentContent('');
+        setCurrentUserName('');
+        const response = await trpc.updateBlog.mutate({id, blogData: {comment: {content: currentContent, userName: currentUserName}}});
+        if(!response){
           setComments((prevComments: Comment[]) => prevComments.slice(0, prevComments.length - 1));
           return;
         }
@@ -42,15 +42,15 @@ export default function CommentManager({ setComments, comments, id }: CommentMan
             <div className={styles["comment-input-area"]}>
               <div className={styles["comment-textarea-wrapper"]}>
                 <input
-                  value={currentCommenterName}
-                  onChange={(e) => setCurrentCommenterName(e.target.value)}
+                  value={currentUserName}
+                  onChange={(e) => setCurrentUserName(e.target.value)}
                   onFocus={() => setError(false)}
                   className={styles["name-input"]}
                   placeholder={'Your name'}
                   />
                 <textarea
-                  value={currentComment}
-                  onChange={(e) => setCurrentComment(e.target.value)}
+                  value={currentContent}
+                  onChange={(e) => setCurrentContent(e.target.value)}
                   onFocus={() => setError(false)}
                   className={styles["comment-textarea"]}
                   placeholder={'Add a comment...'}
@@ -66,9 +66,9 @@ export default function CommentManager({ setComments, comments, id }: CommentMan
             {comments.map((comment, index) => (
               <div key={index} className={styles["comment"]}>
                 <div className={styles["commenter-name"]}>
-                  {comment.commenterName}
+                  {comment.userName}
                 </div>
-                {comment.comment}
+                {comment.content}
               </div>
             ))}
           </div>

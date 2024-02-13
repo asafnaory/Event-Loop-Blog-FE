@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { Children, useEffect, useState } from "react"
 import LikeManager from "../LikeManager/LikeManager";
 import CommentManager from "../CommentManager/CommentManager";
 import styles from "./BlogInteractionManager.module.css";
@@ -9,8 +9,8 @@ interface BlogInteractionManagerProps {
   id: string;
 }
 export type Comment = {
-  comment: string;
-  commenterName: string;
+  content: string;
+  userName: string;
 };
 
 

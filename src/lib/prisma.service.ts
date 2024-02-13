@@ -34,34 +34,30 @@ export class PrismaService implements DBClient{
 
   async createOrUpdateBlog(id: string, blogData: BlogDataDto ): Promise<Blog | null> {
     const blog = await this.getBlogDataById(id);
-    console.log('blogData', blogData);
     const updates: Prisma.BlogUpdateInput = {};
-    if(blog){
-        if (blogData.likes) {
-            updates.likes = Number(blogData.likes);
-        }
-        if (blogData.comment) {
-            updates.comments = {
-                create: blogData.comment,
-            };
-        }
-        console.log('updates', updates);
-        
-          return this.prisma.blog.update({
-          where: { id },
-          data: updates,
-        });
-    }
-    else {
-        return this.prisma.blog.create({
-          data: {
-            id,
-            comments: {
-              create: blogData.comment,
-            },
-            likes: 0,
+    if (blog) {
+      if (blogData.likes) {
+        updates.likes = Number(blogData.likes);
+      }
+      if (blogData.comment) {
+        updates.comments = {
+          create: blogData.comment,
+        };
+      }
+      return this.prisma.blog.update({
+        where: { id },
+        data: updates,
+      });
+    } else {
+      return this.prisma.blog.create({
+        data: {
+          id,
+          comments: {
+            create: blogData.comment,
           },
-        });
+          likes: 0,
+        },
+      });
     }
   }
 

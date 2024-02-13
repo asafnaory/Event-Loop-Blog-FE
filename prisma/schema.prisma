@@ -21,8 +21,8 @@ model Blog {
 
 model Comment {
   id            String      @id @default(uuid())
-  comment       String
-  commenterName String
+  content       String
+  userName      String
   blog          Blog     @relation(fields: [blogId], references: [id])
   blogId        String   // Update the type to match the referenced field
 }

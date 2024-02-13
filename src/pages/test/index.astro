@@ -1,0 +1,22 @@
+---
+const delay = (ms: any) => new Promise((resolve) => setTimeout(resolve, ms));
+const personPromise = fetch('https://randomuser.me/api/')
+  .then((response) => response.json())
+  .then((arr) => arr[0]?.name?.first);
+const factPromise = fetch('https://catfact.ninja/fact')
+  .then((response) => response.json())
+  .then((res) => delay(2000).then(() => res))
+  .then((factData) => factData.fact);
+---
+
+<html>
+  <head>
+    <title>A name and a fact</title>
+  </head>
+  <body>
+    <h2>A name</h2>
+    <p>{personPromise}</p>
+    <h2>A fact</h2>
+    <p>{factPromise}</p>
+  </body>
+</html>

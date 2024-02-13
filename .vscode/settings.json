@@ -19,7 +19,7 @@
     "editor.detectIndentation": false
   },
   "[typescript]": {
-    "editor.defaultFormatter": "svipas.prettier-plus"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"

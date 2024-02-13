@@ -1,10 +1,17 @@
 ---
-import "../layouts/ComponentsLayout/Layout.module.css";
-import Home from "../components/Home/Home.astro";
-import Icon from "../components/Icon/Icon.astro";
-import { subjectsList } from "./subjects-list.ts";
+import '../layouts/ComponentsLayout/Layout.module.css';
+import Home from '../components/Home/Home.astro';
+import Icon from '../components/Icon/Icon.astro';
+import { subjectsList } from './subjects-list.ts';
+export const prerender = false;
 ---
 
-<Home>
-  {subjectsList.map((subject) => <Icon link={subject.link} image={subject.image} alt={subject?.name} />)}
-</Home>
+<div>
+  <Home>
+    {
+      subjectsList.map((subject) => (
+        <Icon link={subject.link} image={subject.image} alt={subject?.name} />
+      ))
+    }
+  </Home>
+</div>

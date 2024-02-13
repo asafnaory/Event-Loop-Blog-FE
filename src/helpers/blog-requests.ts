@@ -1,6 +1,5 @@
 import { baseUrl } from "../config/config";
-import { type Comment } from "../components/BlogInteractionManager/BlogInteractionManager"
-console.log('baseUrl:', baseUrl);
+import { type Comment } from '../components/BlogInteractionManager/BlogInteractionManager';
 
 type BlogData = {
   id: string;
@@ -15,7 +14,6 @@ type SuccessOrError = { success: {status: number} } | { error: Error, }
 
 function setEndpoint(id: string) {
   const res = `${baseUrl}/api/blogs/${id}`;
-  console.log('url: ',res); 
   return res;
 }
 

@@ -2,7 +2,8 @@ import React from 'react';
 import styles from './LikeManager.module.css';
 import { useLocalStorage } from '../react-hooks/useLocalStorage';
 import confetti from 'canvas-confetti';
-import { addLike } from '../../helpers/blog-requests';
+import { trpc } from '../../client';
+// import { serverActions } from '../../pages/api/trpc/[trpc]';
 
 interface LikeManagerProps {
     id: string;
@@ -12,25 +13,25 @@ interface LikeManagerProps {
 
 export default function LikeManager({likes,setLikes, id }: LikeManagerProps): JSX.Element {
     const [isLiked, setIsLiked] = useLocalStorage(id, false)
-
     const handleLike = async () => {
-      confetti({
-        particleCount: 150,
-        spread: 60
-      });
-      
+        confetti({
+          particleCount: 150,
+          spread: 60
+        });
         const newLikes = likes + 1;
         setLikes(newLikes);
         setIsLiked(true);
-        const response = await addLike(newLikes, id);
-        if('error' in response){
+        // const res = serverActions.getHello('world');
+        // console.log(res);
+        const response = await trpc.updateBlog.mutate({id, blogData: {likes: newLikes}});
+        if(!response){
           setLikes(likes);
           setIsLiked(false);
         }
       };
 
     return (
-        <button disabled={isLiked} className={styles.button} onClick={handleLike}>
+        <button disabled={false /*isLiked*/} className={styles.button} onClick={handleLike}>
              <span>🎉</span>
             <span> Like {likes}</span>
         </button>
