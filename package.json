@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "prisma migrate deploy && prisma generate && astro build",
+    "resolved": "prisma migrate resolve --applied '20240209092649_rename_fields'",
+    "build": "resolved && prisma migrate deploy && prisma generate && astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
