@@ -1,10 +1,32 @@
 ---
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { getCollection, type CollectionEntry, getEntry } from 'astro:content';
 import Blog from '../../components/Blog/Blog.astro';
-// SSR: 
-console.log('SSR');
-const blogs = await getCollection('blogs');
-const blog = blogs.find((blog) => blog.slug === Astro.params.slug)!;
+import { Suspense } from 'simple-stack-stream/components';
+
+// SSG
+// export const prerender = true;
+// export async function getStaticPaths() {
+//   const blogs = await getCollection('blogs');
+//   return blogs.map(blog => ({
+//     params: { slug: blog.slug }, props: { blog },
+//   }));
+// }
+// const { blog } = Astro.props;
+
+// SSR 
+
+const { slug } = Astro.params;
+
+if (slug === undefined) {
+    throw new Error("Slug is required");
+  }
+  
+  const blog = await getEntry("blogs", slug);
+  
+  if (blog === undefined) {
+      return Astro.redirect("/404");
+    }
+
 const { Content } = await blog.render();
 
 ---

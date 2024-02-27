@@ -10,7 +10,7 @@ type BlogProps = {
   image: ImageMetadata;
   author: string;
   date: string;
-  tags: string[];
+tags: string[];
 };
 interface CommentableBlogProps extends BlogProps {
   id: string;
@@ -23,13 +23,12 @@ const { title, image, author, tags, date } = Astro.props;
 const id = (Astro.props as CommentableBlogProps).id;
 const commentable = (Astro.props as CommentableBlogProps).commentable;
 
+const blogData = await blogService.getBlogDataById(id)  
+
 const transitionName = title
   .replace(/[^a-zA-Z\s]/g, '')
   .replace(/\s/g, '-')
   .toLowerCase();
-console.log(transitionName);
-
-const blogData = await blogService.getBlogDataById(id)   
 ---
 
 <Layout>
@@ -54,6 +53,6 @@ const blogData = await blogService.getBlogDataById(id)
     </div>
   </article>
   {
-   commentable && <BlogInteractionManager id={id} blogData={blogData} client:only="react"  />
+   commentable && <BlogInteractionManager id={id} blogData={blogData} client:only="react" />
   }
 </Layout>

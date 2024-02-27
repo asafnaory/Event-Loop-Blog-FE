@@ -21,8 +21,6 @@ export default function LikeManager({likes,setLikes, id }: LikeManagerProps): JS
         const newLikes = likes + 1;
         setLikes(newLikes);
         setIsLiked(true);
-        // const res = serverActions.getHello('world');
-        // console.log(res);
         const response = await trpc.updateBlog.mutate({id, blogData: {likes: newLikes}});
         if(!response){
           setLikes(likes);
@@ -31,7 +29,7 @@ export default function LikeManager({likes,setLikes, id }: LikeManagerProps): JS
       };
 
     return (
-        <button disabled={false /*isLiked*/} className={styles.button} onClick={handleLike}>
+        <button disabled={isLiked} className={styles.button} onClick={handleLike}>
              <span>🎉</span>
             <span> Like {likes}</span>
         </button>

@@ -7,6 +7,7 @@ import ME from '../../../public/me.png';
 import Layout from '../ComponentsLayout/Layout.astro';
 const events = (await getCollection('events')) || [];
 const { frontmatter } = Astro.props;
+export const prerender = true;
 ---
 
 <Layout>
