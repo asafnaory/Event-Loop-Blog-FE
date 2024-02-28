@@ -1,4 +1,4 @@
-import { Children, useEffect, useState } from "react"
+import { useState } from "react"
 import LikeManager from "../LikeManager/LikeManager";
 import CommentManager from "../CommentManager/CommentManager";
 import styles from "./BlogInteractionManager.module.css";

@@ -1,5 +1,5 @@
 ---
-id: 'ace2c100-c970-41ef-8cd5-1accac12f6b6'
+id: '683d7f38-dcb5-4259-aceb-3493bd85f9d5'
 author: Asaf Naory
 title: "React Server Component vs Astro Components"
 tags: ['react', 'next', 'astro']
@@ -13,7 +13,7 @@ React Server Components (RSC) are the, (not so) new hype in React, I guess you k
 
 RSC are written using React (of course), and the data that is streamed to the client, 
 it is not HTML, but is something called *React Server Component Payload* that represents the component, 
-the placeholders for where Client Components should be rendered and any props passed from the Server.
+the placeholders for where [Client Components](https://nextjs.org/docs/app/building-your-application/rendering/client-components) should be rendered and any props passed from the Server.
 
 For example:
 
@@ -57,16 +57,18 @@ Well, that is probably because that in the context of *metaframeworks* (like Nex
 1. SSR happens only in the initial page loading and RSC are running on the server during the whole app life time
 2. SSR returns HTML and RSC return the *React Server Component Payload*
 
-But if you think about it, SSR or server side rendering is accually what is says it is, render the code on the server. It has noting to do with initial page load. 
+But if you think about it, SSR or server side rendering, has noting to do with initial page load or HTML. 
 If you redner the code on the server, you SSR. Seems like RSC and SSR try to achive the same goal, so why do we need to models? 
 
-// TODO ASAF ADD THIS  - In RSC they need to use React Server Component Payload because the component goes into the React virtual dom tree
+Well that is due to the fact that NextJs and Remix are really SPAs and astro in an MPA.
 
-well that is due to the fact that NextJs and Remix are really SPAs and astro in an MPA. 
+In Asto every navigation returns a new HTML, so it can leverage the SSR for initial page load from NextJs to all its pages.
 
 
-NextJs (excludes partial pre-rendering) - when a RSC is used in NextJS is should know the placeholders for where Client Components should be rendered and any props passed from the Server
+In NextJs when navigating, there is no new HTML, so there sould be a different way to get server rendered data that will be injected to the already created React Vdom (hence RSC)
 
+
+So we undersand that RSC and Astro components are trying to achive the samge things, now for my case
 
 ### Astro components use clearer model and less error prone
 Asro components are exactly the model I wanted! why? 
@@ -83,8 +85,8 @@ Astro components ship HTML to the client and not *React Server Component Payload
 Look at the react server component payload above, it is not easy to understand what is going on there. 
 If something unexpectable is displayed in the browser, can you tell what is the problem?
 In Astro components you can, since it is just HTML.
-The cooler thing is that this model keeps being true always, since Astro is MPA and not SPA. When you neviage from a route to a different route in NextJs or Remix, you accually stay in the same page.
-This is the SPA model we all know. In Astro every time we go to a new route we get new HTML, so the SSR model is still valid. 
+As I mentioned above this model keeps being true after navigations as well, since Astro is MPA and not SPA.
+In Astro every time we go to a new route we get new HTML, so the SSR model is still valid. 
 
 Now you maybe think what about hard refresh between routes? This is not to purpose of this blog post, but take a look at astro [view transitions](https://docs.astro.build/en/guides/view-transitions/).
 
