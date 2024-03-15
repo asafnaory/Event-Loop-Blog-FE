@@ -14,8 +14,5 @@ console.log(`Port: ${port}`, PORT);
 export default defineConfig({
   integrations: [react(), mdx() /*, qwikdev()*/],
   output: 'server',
-  // adapter: vercel(),
-  adapter: node({
-    mode: 'standalone',
-  }),
+  adapter: vercel(),
 });
