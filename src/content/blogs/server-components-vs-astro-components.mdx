@@ -8,14 +8,13 @@ image: '../assets/astro-blog.png'
 authorImage: '../assets/AsafNaory2.png'
 ---
 
-React Server Components (RSC) are the, (not so) new hype in React, I guess you know them if you are here, but for those of you who do not
- [NextJs docs](https://nextjs.org/docs/app/building-your-application/rendering/server-components)
+React Server Components (RSC) represent an emerging trend in the React ecosystem. If you're already familiar with RSC, you understand their significance. 
+For those less familiar, I recommend exploring the [NextJs documentation](https://nextjs.org/docs/app/building-your-application/rendering/server-components) for a deeper understanding.
 
-RSC are written using React (of course), and the data that is streamed to the client, 
-it is not HTML, but is something called *React Server Component Payload* that represents the component, 
-the placeholders for where [Client Components](https://nextjs.org/docs/app/building-your-application/rendering/client-components) should be rendered and any props passed from the Server.
+RSCs are crafted using React. The data streamed to the client isn't traditional HTML but rather a unique format known as React Server Component Payload. 
+This format includes the components, placeholders for where [Client Components](https://nextjs.org/docs/app/building-your-application/rendering/client-components) are to be rendered, and any properties sent from the server.
 
-For example:
+Consider the following example, which illustrates the complexity of the React Server Component Payload:
 
 ```
 3:I[7151,[],""]
@@ -32,74 +31,53 @@ For example:
 ```
 
 
-On the other hand Astro components are very simple. They are HTML-only templating components with no client-side runtime. 
-As it says on the astro website, it is just good old HTML, with some extra features.
+In contrast, Astro components offer a simpler approach. They are HTML-only templating components without a client-side runtime. According to the Astro website, they leverage good old HTML, enhanced with some additional features.
+
+This article aims to compare RSC with Astro Components to determine any advantages one might have over the other.
 
 
-In this article I will compare RSC with Astro Components to see if there any advantage to either one. 
+### React Server Components vs. Server-Side Rendering (SSR)
+There's a common misconception that RSC and SSR are entirely different, yet they share several benefits. For instance, both approaches allow moving data fetching to the server, closer to the data source. The key difference lies in streaming capabilities, which we'll discuss shortly.
+
+However, why differentiate RSC from SSR if their benefits overlap? The distinction becomes clearer when considering metaframeworks like NextJs or Remix, where RSC and SSR serve different purposes:
+
+SSR occurs only during the initial page load, whereas RSC operates throughout the app's lifespan.
+SSR delivers HTML, whereas RSC returns the React Server Component Payload.
+Despite these differences, server-side rendering fundamentally means processing code on the server, regardless of the output format or timing.
 
 
-### React server component are not SSR (?) but Astro components are
-People always say RSC and SSR are not the same, but they accually quit are. 
-If you look at the  Nextjs Docs under the benefits of server rendering (under react server components) you will accually find all the [benefits of SSR](https://nextjs.org/docs/app/building-your-application/rendering/server-components#benefits-of-server-rendering)
+### Astro Components: A Clearer and Less Error-Prone Model
+Astro components appeal to me for their clarity and reduced potential for errors. They share several benefits with RSC, 
+such as efficient data fetching and minimal bundle sizes, yet the differences are notable.
 
-
-For example : Data Fetching  *Server Components allow you to move data fetching to the server, closer to your data source* - this is also true for SSR. there is no special benefit for 
-server components doing that. 
-
-The only diffrences is *Streaming* which we will talk about soon. 
-
-
-But if RSC have the same benefits as SSR, why people say these are two different concepts? 
-
-Well, that is probably because that in the context of *metaframeworks* (like NextJs or Remix) RSC and SSR are different:
-
-1. SSR happens only in the initial page loading and RSC are running on the server during the whole app life time
-2. SSR returns HTML and RSC return the *React Server Component Payload*
-
-But if you think about it, SSR or server side rendering, has noting to do with initial page load or HTML. 
-If you redner the code on the server, you SSR. Seems like RSC and SSR try to achive the same goal, so why do we need to models? 
-
-Well that is due to the fact that NextJs and Remix are really SPAs and astro in an MPA.
-
-In Asto every navigation returns a new HTML, so it can leverage the SSR for initial page load from NextJs to all its pages.
-
-
-In NextJs when navigating, there is no new HTML, so there sould be a different way to get server rendered data that will be injected to the already created React Vdom (hence RSC)
-
-
-So we undersand that RSC and Astro components are trying to achive the samge things, now for my case
-
-### Astro components use clearer model and less error prone
-Asro components are exactly the model I wanted! why? 
-Astro component have the same benefits as RSC - for example: 
-1. Data Fetching - Astro components have an area where you can data fetch your data, and use it in the HTML template
-2. Bundle Sizes - Astro components ship Zero javasctipt to the client. 
-
-But the model is cleaer, for three reasons:
+But the model is cleaer, for two reasons:
 
 #### 1. HTML, Only HTML and nothing but HTML
 
-Astro components ship HTML to the client and not *React Server Component Payload*. In my opinion this is simpler model, since the web works with HTML.
+Astro components deliver HTML to the client, not the React Server Component Payload. 
+This simpler model aligns with the webs foundational technology, HTML. 
+The explicit nature of Astro's output makes diagnosing issues more straightforward compared to the complexity of RSC payloads. 
+Additionally, as an MPA (Multi-Page Application), Astro maintains this straightforward SSR model across navigations.
 
-Look at the react server component payload above, it is not easy to understand what is going on there. 
-If something unexpectable is displayed in the browser, can you tell what is the problem?
-In Astro components you can, since it is just HTML.
-As I mentioned above this model keeps being true after navigations as well, since Astro is MPA and not SPA.
-In Astro every time we go to a new route we get new HTML, so the SSR model is still valid. 
+Now you may think what about hard refresh between routes? 
+This is not to purpose of this blog post, but take a look at astro [view transitions](https://docs.astro.build/en/guides/view-transitions/).
 
-Now you maybe think what about hard refresh between routes? This is not to purpose of this blog post, but take a look at astro [view transitions](https://docs.astro.build/en/guides/view-transitions/).
+#### 2. Distinct Models for Server and Client Environments
+Astros delineation between server and client components prevents the common pitfalls associated with using a single model for both environments.
+Consider the transformation of a simple component into a client-side component due to a misunderstanding of the model.
+Astro's clear separation mitigates this risk, ensuring server components remain server-side.
 
-#### 2. Two Different Models for Two Different Environemnts
-One of the benefits of RSC is the fact they are *React Components*. This fact make it easyer for developers to undersand the new syntax since this is the same coding model,
-and it feels simmiar to the client component they know already (like Lego breaks). But this can be also drawback. When using the same model it easyer to make mistakes. take for example this component: 
+For example, consider the following component:
 
 ```typescript
     const displayHello = () => {
         <h1>Hello user!</h1>
     }
 ```
-which will display very simple string on the screen. Lets say for example that after a few weeks there is a request to change it to display the `user name`.
+which will display very simple string on the screen. 
+
+Lets say for example that after a few weeks there is a request to change it to display the `user name`.
+
 The developer can make this change:
 
 ```typescript
@@ -124,7 +102,7 @@ I totaly think it can happen. Now this component if forever be a client componen
 
 
 The fact that astro has a different model for components that run on the server and cannot be configuerd to run on the client is a benefit in my opinion.
-First, the model is very easy - 
+First, the model is very easy:
 
 
 for example: 
@@ -149,27 +127,30 @@ Second, this component forever will run on the server, and cannot be configuerd 
 If you want a client component, you have to use a different model (React, Solid, Preact etc). 
 If you want to cahnge the environemnt the component runs on, you need to create a new component. 
 
-### Remember Streaming?
-Server Components have a cool benefit, they allow you to split the rendering work into chunks and stream them to the client as they become ready. Cool right?
-Accually astro components have it already. Astros SSR uses HTML streaming to send each component to the browser when available for faster page loading [look here](https://docs.astro.build/en/recipes/streaming-improve-page-performance/).
-That means that only by spliting your components you can steam each chunk to the client when it is ready. 
-As for today Astro does not give a native way to suspense async compoments, however there is a [small package by ben holmes](https://simple-stack.dev/stream) 
-Quick note - using this package in the `astro.config.mjs` will break view transitions for some reason. I hope this will be fixed soon.
+
+Remember Streaming?
+Server Components offer a unique advantage: they allow you to divide the rendering process into chunks and stream these to the client as they're ready. 
+Pretty cool, right? Interestingly, Astro components already feature this capability. 
+Astros Server-Side Rendering (SSR) employs HTML streaming to deliver each component to the browser as soon as it becomes available, enhancing page load speed. You can find more about this [here](https://docs.astro.build/en/recipes/streaming-improve-page-performance/).
+This means that by merely splitting your components, you can stream each piece to the client upon readiness. Currently, Astro lacks a built-in method for suspending asynchronous components. However, there is a small package by [Ben Holmes](https://simple-stack.dev/stream)  that provides this functionality. A quick note: using this package in the astro.config.mjs file may disrupt view transitions for some reason.
+It's hoped that this issue will be resolved soon.
+
+### More Streaming - Partial Pre-rendering
+
+Next.js 14 has just announced their new feature, [Partial Pre-rendering](https://vercel.com/blog/partial-prerendering-with-next-js-creating-a-new-default-rendering-model) (currently experimental). 
+This approach allows static portions of a route to be pre-rendered and served from the cache, with dynamic content "holes" streamed in — all within a single HTTP request. 
+This capability is quite exciting, and it was surprising to discover that Astro does not support this behavior yet. 
+In Astro, you can only pre-render an entire page. If you wish to stream parts of a page, you must configure that page for Server-Side Rendering (SSR).
+However, following Next.js's announcement of this feature, it's likely that Astro will soon adopt a similar approach.
+I have initiated a discussion on the [Astro Project Roadmap](https://github.com/withastro/roadmap/discussions/852) regarding this.
 
 
-### More streaming - partial pre rendering
-NextJs 14 has just announsed their new feuture [Partial Prerendering ](https://vercel.com/blog/partial-prerendering-with-next-js-creating-a-new-default-rendering-model) (as experimental). 
-Partial Prerendering allows static portions of a route to be prerendered and served from the cache with dynamic holes streamed in, 
-all in a single HTTP request. This is very cool and I was surprised to see that Astro does not supprot this kind of behavior.
-In astro you can only prerender the whole page, and if you want to stream in some parts of the page, you have to configure that page to be SSR,
-however I am sure after NextJs has announsed this feuture, Astro will have to support it as well soon. I opend  a discussion on the [Astro Project Roadmap ](https://github.com/withastro/roadmap/discussions/852) 
+### Bonus - Client Components
 
-
-### Bounos - Client compoments
-We talked about server components, but as a bounos lets talk a little bit about client components. In React (and nextjs) in order to create a client component you need to use
-the `'use client'` directive. This is cool but a littel restrictive, because what if I want this client component to be ship to the client only when it is visible to the user? 
-In Astro you can use [Client Directives](https://docs.astro.build/en/reference/directives-reference/#client-directives). You can use for example `client:visible`. 
-which is useful for low-priority UI elements that are either far down the page. This directive load and hydrate the component JavaScript once the component has entered the users viewport.
+While we have discussed server components, lets delve into client components as a bonus. In React (and Next.js), creating a client component requires the `'use client'` directive. 
+Although useful, this approach can be somewhat limiting. For instance, what if you want the client component to only be sent to the client when it becomes visible to the user? Astro provides a solution through its [Client Directives](https://docs.astro.build/en/reference/directives-reference/#client-directives). 
+One such example is `client:visible`, particularly beneficial for low-priority UI elements positioned further down the page. 
+This directive ensures the components JavaScript is loaded and hydrated once the component enters the users viewport.
 
 
 For example: 
@@ -185,9 +166,8 @@ For example:
 ```
 
 ### Conclusion
-In this article we compared React Server Components with Astro Components.
-We talk about a few things: 
-1. Both have the same benefits, but Astro components have a clearer model and are less error prone in my opinion (HTML vs RSC payload).
-2. Astro components have a streaming model and that they are SSR all the way.
-3. Astro components have a different model for server and client components, and that they have a client directives which gives you more control over when the client component is loaded.
-4. Astro components do not support partial prerendering, but I am sure they will have to support it soon after NextJs has announsed this feuture.
+Comparing React Server Components with Astro Components reveals that while both share common benefits, 
+Astros approach provides a clearer, simpler, and less error-prone model. 
+The differences in streaming capabilities, model clarity, and client component management highlight the unique advantages of each framework.
+As the web development landscape evolves, it is crucial to consider these aspects when choosing between React and Astro for your projects.
+

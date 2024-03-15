@@ -8,13 +8,14 @@ type Props = {
   blogs: CollectionEntry<"blogs">[];
 };
 const { blogs } = Astro.props;
+const sortedBlogs = blogs.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
 ---
 
 <Layout>
   <div class={styles["blog-container"]}>
     <ul class={styles["blog-list"]}>
       {
-        blogs.map((blog) => (
+        sortedBlogs.map((blog) => (
           <Card
             id={blog.data.id}
             fullOrRlativeRedirect="relative"

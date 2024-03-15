@@ -1,0 +1,119 @@
+---
+id: '73d59eca-f75b-4ac5-81fb-1e7cf4267ecd'
+author: Asaf Naory
+title: "The Cool Stack"
+tags: ['react', 'astro', trpc]
+date: March 6 2024
+image: '../assets/astro-blog.png'
+authorImage: '../assets/AsafNaory2.png'
+---
+
+## TL;DR - The Cool Stack
+1. I am a big fan of the NextJS and React stack, especially its server components and server actions.
+2. I believe Astro offers a superior model for server components, combining numerous advantages with fewer drawbacks.
+3. With Astro, you are not confined to React; you can use any `"client components"` you prefer.
+4. Astros hydration process is more refined than NextJs, leading to reduced overhead.
+5. In my opinion, TRPC represents the best approach for ensuring type safety across the network.
+6. My recommendation? Combine Astro with any client library you like (React, Solid, Qwik, etc.) and TRPC for what I call - The cool stack!
+
+## The Cool Stack
+
+I firmly believe the NextJS and React stack is phenomenal, truly! The way this stack has revolutionized my approach to web development is mind-blowing.
+
+Consider this - the concept that a component is actually created in the same location as its required data, eliminating the unnecessary back-and-forth between server and client, is nothing short of revolutionary.
+
+With the advent of server components, we are able to retrieve data at the components inception and seamlessly stream the fully prepared component to the client upon readiness.
+
+This model is eloquently explained in Dan Abramovs article, [The Two React article](https://overreacted.io/the-two-reacts/).
+
+Furthermore, I am enamored with the NextJS (and, imminently, React) RPC model as detailed in [Reacts February 2024 Blog Post](https://react.dev/blog/2024/02/15/react-labs-what-we-have-been-working-on-february-2024#actions).
+
+The introduction of server actions brings cross-network type safety to the forefront, which is remarkable! It allows for backend function calls from the client, ensuring that any mismatch in argument types results in a compilation error. This embodies the [shift-left testing](https://en.wikipedia.org/wiki/Shift-left_testing) principle in all its glory.
+
+However, I posit that the benefits offered by server components and server actions can also be achieved using alternative stacks, which might mitigate some of the drawbacks associated with these features - I call it the cool stack.
+
+
+## Astro Components vs. Server Components
+
+I have already discussed this in a [different blog post](https://event-loop-blog.vercel.app/blogs/server-components-vs-astro-components), but there are a few reasons why I prefer Astro components over React server components:
+
+1. Astro components stream HTML to the client, unlike React Server Component Payload. In my opinion, this is a cleaner model and much easier to debug.
+2. This approach remains consistent when navigating between routes, as Astro operates as an MPA rather than an SPA. This means Astro components always stream HTML to the client, not just on initial page load, making for a cleaner model in my view.
+3. Astro offers distinct component models for different environments. Astro components differ in appearance from React components, reducing the likelihood of mistakenly converting them to client components due to state requirements or other reasons. It is a clear division: one model for the server, another for the client.
+
+## Beyond React
+
+Another advantage of Astro is its flexibility with UI libraries. You are not limited to React; Astro supports a range of UI libraries, such as [Solid, Svelte, Vue, Preact](https://docs.astro.build/en/guides/framework-components/#official-ui-framework-integrations), and even [Qwick](https://qwik.dev/docs/integrations/astro/). If you are interested in the server and client components model but not a fan of React, Astro offers compatibility with any UI library. The model remains the same, with Astro component.
+
+## Island Architecture and Client Directives vs. Client Components
+
+To convert a React component into a `"Client Component"` in NextJs, you need to add the directive `'use client'` at the top of the file.
+
+According to NextJs documentation, `'use client'` declares a boundary between server and client component modules. By adding `'use client'` to a file, all imported modules, including child components, are designated for the client bundle.
+
+In NextJs, when you navigate to the first page (initail page load), the entire app is hydrated, meaning all client components undergo hydration during the this phase. However, this raises a question: why hydrate all components upfront, especially those deep in the tree that may not be immediately visible to the client unless navigated to a specific page?
+
+There are two solutions for this issue - Island Architecture and Client Directives
+
+## Astro: An MPA Utilizing Island Architecture with Client Directives
+
+Astro operates as a Multi-Page Application (MPA), meaning that navigation to a new page results in receiving fresh HTML from the server for that page.
+
+Island Architecture: Within any page, whether it is the initial load or subsequent pages, you can embed `"islands"` of interactivity. These islands represent snippets of JavaScript within a sea of HTML. Being an MPA, these islands are not transferred to the client until the specific page containing them is navigated to.
+
+Client Directives: [These directives](https://docs.astro.build/en/reference/directives-reference/#client-directives) manage how UI Framework components are hydrated on a page. By default, UI Framework components are not hydrated on the client. Without a `client:*` directive, the components HTML is rendered on the page sans JavaScript. With Client directives, you can dictate the loading priority of client components (for example, among multiple components on a page) or opt to download a client component only when it becomes [visible](https://docs.astro.build/en/reference/directives-reference/#clientvisible) to the user.
+
+This approach ensures that JavaScript is only sent to the client when truly necessary. Its only upon the users navigation to the page containing the interactive component, and even then, you maintain control over delaying its hydration until it becomes visible.
+
+
+### Server Actions vs. TRPC
+
+Now for the interesting part!
+
+You might think, This is cool, but NextJs has a feature called Server Actions. How can Astro compete with that?
+
+Server Actions boast two main features: 1. Type safety across the network, and 2. The ability to call a remote procedure over the network as if it were a local function in your code (RPC).
+
+I find the first feature outstanding, but I am less enthusiastic about the second. Let me explain.
+
+### Type Safety Over the Network
+
+There is not much to say here except that it is genuinely fantastic. The ability to call server functions from the client with type safety is an invaluable tool.
+
+### Remote Procedure Call - RPC (Server Actions)
+
+Server Actions are asynchronous functions executed on the server, typically used in client components to manipulate data in the data layer. This feature can be handy but also potentially hazardous. Consider a scenario where you are coding and need a function not present in your current file. The natural response is to write it, right? That is fine for a regular function, but what if it is a remote procedure call? My concern is that these functions, appearing and behaving as regular functions, might lead developers to continuously create new functions for data layer modifications. Instead of maintaining a concise and agreed-upon API between the backend and frontend, we might end up with numerous similar or identical functions. Imagine then, changes in the data layer necessitating an API modification. Not all client developers are versed in writing backend code concerning security, error handling, etc.
+
+### TRPC
+
+On the other hand, [trpc](https://trpc.io/) not only provides type safety across the network but also distinctly separates itself as a different procedure rather than just another function in the codebase. Calling a trpc function appears as follows:
+
+```typescript
+
+    export const appRouter = router({
+    updateBlog: publicProcedure
+        .input(
+        z.object({
+            id: z.string(),
+            blogData: z.object({
+            likes: z.number().optional(),
+            comment: z
+                .object({
+                content: z.string(),
+                userName: z.string(),
+                })
+                .optional(),
+            }),
+        }),
+        )
+        .mutation(async (opts) => {
+        const { input } = opts;
+        const { id, blogData } = input;
+        const blog = await blogService.createOrUpdateBlog(id, blogData);
+        return blog;
+        }),
+    });
+
+```
+Therefore, even if Astro lacks the Server Actions feature, utilizing trpc offers the critical advantage of type safety with a clear separation of concerns.
+

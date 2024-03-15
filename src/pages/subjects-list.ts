@@ -6,6 +6,7 @@ import JS from "../images/logo-javascript.svg";
 import COPILOT from "../images/copilot.png";
 import NEXTJS from '../images/nextjs.png';
 import ASTRO from '../images/astro.png';
+import TRPC from '../images/trpc.svg';
 
 export const subjectsList = [
   {
@@ -13,39 +14,44 @@ export const subjectsList = [
     image: JS,
     link: '/javascript',
   },
-  {
-    name: 'nestjs',
-    image: NESTJS,
-    link: '/nestjs',
-  },
+  // {
+  //   name: 'nestjs',
+  //   image: NESTJS,
+  //   link: '/nestjs',
+  // },
   {
     name: 'react',
     image: REACT,
     link: '/react',
   },
-  {
-    name: 'nodejs',
-    image: NODEJS,
-    link: '/nodejs',
-  },
+  // {
+  //   name: 'nodejs',
+  //   image: NODEJS,
+  //   link: '/nodejs',
+  // },
   {
     name: 'typescript',
     image: TYPESCRIPT,
     link: '/typescript',
   },
   {
-    name: 'copilot',
+    name: 'next',
     image: NEXTJS,
-    link: '/next',
+    link: '/nextjs',
   },
   {
-    name: 'next',
+    name: 'copilot',
     image: COPILOT,
-    link: '/next',
+    link: '/copilot',
   },
   {
     name: 'astro',
     image: ASTRO,
     link: '/astro',
+  },
+  {
+    name: 'trpc',
+    image: TRPC,
+    link: '/trpc',
   },
 ];

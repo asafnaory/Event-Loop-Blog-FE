@@ -1,13 +1,18 @@
 ---
-const delay = (ms: any) => new Promise((resolve) => setTimeout(resolve, ms));
-const factPromise = fetch('https://catfact.ninja/fact')
-  .then((response) => response.json())
-  .then((res) => delay(2000).then(() => res))
-  .then((factData) => factData.fact);
+
+const promise = new Promise((resolve) => {
+  setTimeout(() => {
+    resolve('hello');
+  }, 2000);
+});
+
+const hello = await promise; 
+export const prerender = false;
+// console.log('render TestOne!');
 
 ---
 
 
 <div slot="test-one" style="color: white;">
-    <p>{factPromise}</p>
+    <p>{hello}</p>
 </div>

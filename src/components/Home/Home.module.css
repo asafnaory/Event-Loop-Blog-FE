@@ -13,7 +13,7 @@
     margin-top: 8%;
     color: var(--color-text-on-primary);
     font-family: var(--text-font-family);
-    font-size: 2em;
+    font-size: 5em;
   }
 
 
@@ -89,7 +89,7 @@
 
     }
     .title {
-      font-size: 2em; /* Adjust font size to fit smaller screen */
+      font-size: 3em; /* Adjust font size to fit smaller screen */
     }
     .icon-wrapper {
       /* overflow: auto; */

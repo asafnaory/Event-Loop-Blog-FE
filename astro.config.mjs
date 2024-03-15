@@ -5,16 +5,17 @@ import { loadEnv } from "vite";
 import node from "@astrojs/node";
 // import qwikdev from "@qwikdev/astro";
 import vercel from "@astrojs/vercel/serverless";
-const {
-  PORT
-} = loadEnv(process.env.NODE_ENV, process.cwd(), "");
+import simpleStackStream from 'simple-stack-stream';
+const { PORT } = loadEnv(process.env.NODE_ENV, process.cwd(), '');
 const port = Number(PORT) || Number(process.env.PORT) || 4321;
 console.log(`Port: ${port}`, PORT);
-
 
 // https://astro.build/config
 export default defineConfig({
   integrations: [react(), mdx() /*, qwikdev()*/],
-  output: "server",
-  adapter: vercel(),
+  output: 'server',
+  // adapter: vercel(),
+  adapter: node({
+    mode: 'standalone',
+  }),
 });
